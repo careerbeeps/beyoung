@@ -1,0 +1,7 @@
+User-agent: *
+Disallow:
+
+Disallow: /staging.beyoung.in/
+Disallow: /www.beyoung.in/stage/
+
+Sitemap: https://www.beyoung.in/sitemap.xml

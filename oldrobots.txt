@@ -1,0 +1,28 @@
+# Google Image Crawler Setup
+User-agent: Googlebot-Image
+Disallow:
+# Crawlers Setup
+User-agent: *
+
+Disallow: /*&limit
+Disallow: /*&sort
+Disallow: /*?route=checkout/
+Disallow: /*?route=account/
+Disallow: /*?route=affiliate/
+Disallow: /*?route=product/search
+Disallow: /*?page
+Disallow: /*?pages
+Disallow: /*?route
+Disallow: /*?sort
+Disallow: /*?filter
+Disallow: /*?option_value
+Disallow: /login
+Disallow: /specials
+Disallow: /specials*
+Disallow: /login*
+Disallow: /p*
+Disallow: /sales/guest/form/
+Disallow: /staging.beyoung.in/
+
+
+Sitemap: https://www.beyoung.in/sitemap.xml

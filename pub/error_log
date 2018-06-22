@@ -1,0 +1,32 @@
+[06-Feb-2018 10:09:36 UTC] PHP Warning:  include(/home/beeyoung/public_html/dev/var/generation/Magento/MediaStorage/Model/File/Storage/Response/Interceptor.php): failed to open stream: No such file or directory in /home/beeyoung/public_html/dev/vendor/composer/ClassLoader.php on line 444
+[06-Feb-2018 10:09:36 UTC] PHP Stack trace:
+[06-Feb-2018 10:09:36 UTC] PHP   1. {main}() /home/beeyoung/public_html/dev/pub/static.php:0
+[06-Feb-2018 10:09:36 UTC] PHP   2. Magento\Framework\App\Bootstrap->createApplication() /home/beeyoung/public_html/dev/pub/static.php:12
+[06-Feb-2018 10:09:36 UTC] PHP   3. Magento\Framework\ObjectManager\ObjectManager->create() /home/beeyoung/public_html/dev/vendor/magento/framework/App/Bootstrap.php:233
+[06-Feb-2018 10:09:36 UTC] PHP   4. Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/ObjectManager.php:57
+[06-Feb-2018 10:09:36 UTC] PHP   5. Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php:82
+[06-Feb-2018 10:09:36 UTC] PHP   6. Magento\Framework\ObjectManager\Factory\Dynamic\Developer->resolveArgument() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php:53
+[06-Feb-2018 10:09:36 UTC] PHP   7. Magento\Framework\ObjectManager\ObjectManager->create() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php:128
+[06-Feb-2018 10:09:36 UTC] PHP   8. Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/ObjectManager.php:57
+[06-Feb-2018 10:09:36 UTC] PHP   9. Magento\Framework\ObjectManager\Definition\Runtime->getParameters() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php:71
+[06-Feb-2018 10:09:36 UTC] PHP  10. Magento\Framework\Code\Reader\ClassReader->getConstructor() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Definition/Runtime.php:44
+[06-Feb-2018 10:09:36 UTC] PHP  11. ReflectionClass->__construct() /home/beeyoung/public_html/dev/vendor/magento/framework/Code/Reader/ClassReader.php:19
+[06-Feb-2018 10:09:36 UTC] PHP  12. spl_autoload_call() /home/beeyoung/public_html/dev/vendor/magento/framework/Code/Reader/ClassReader.php:19
+[06-Feb-2018 10:09:36 UTC] PHP  13. Composer\Autoload\ClassLoader->loadClass() /home/beeyoung/public_html/dev/vendor/magento/framework/Code/Reader/ClassReader.php:19
+[06-Feb-2018 10:09:36 UTC] PHP  14. Composer\Autoload\includeFile() /home/beeyoung/public_html/dev/vendor/composer/ClassLoader.php:322
+[06-Feb-2018 10:09:36 UTC] PHP Warning:  include(): Failed opening '/home/beeyoung/public_html/dev/var/generation/Magento/MediaStorage/Model/File/Storage/Response/Interceptor.php' for inclusion (include_path='/home/beeyoung/public_html/dev/var/generation:/home/beeyoung/public_html/dev/lib/internal:/home/beeyoung/public_html/dev/var/generation:/home/beeyoung/public_html/dev/lib/internal:/home/beeyoung/public_html/dev/vendor/magento/zendframework1/library:/home/beeyoung/public_html/dev/vendor/phpunit/php-file-iterator:/home/beeyoung/public_html/dev/vendor/phpunit/phpunit:/home/beeyoung/public_html/dev/vendor/symfony/yaml:.:/opt/alt/php70/usr/share/pear') in /home/beeyoung/public_html/dev/vendor/composer/ClassLoader.php on line 444
+[06-Feb-2018 10:09:36 UTC] PHP Stack trace:
+[06-Feb-2018 10:09:36 UTC] PHP   1. {main}() /home/beeyoung/public_html/dev/pub/static.php:0
+[06-Feb-2018 10:09:36 UTC] PHP   2. Magento\Framework\App\Bootstrap->createApplication() /home/beeyoung/public_html/dev/pub/static.php:12
+[06-Feb-2018 10:09:36 UTC] PHP   3. Magento\Framework\ObjectManager\ObjectManager->create() /home/beeyoung/public_html/dev/vendor/magento/framework/App/Bootstrap.php:233
+[06-Feb-2018 10:09:36 UTC] PHP   4. Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/ObjectManager.php:57
+[06-Feb-2018 10:09:36 UTC] PHP   5. Magento\Framework\ObjectManager\Factory\Dynamic\Developer->_resolveArguments() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php:82
+[06-Feb-2018 10:09:36 UTC] PHP   6. Magento\Framework\ObjectManager\Factory\Dynamic\Developer->resolveArgument() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php:53
+[06-Feb-2018 10:09:36 UTC] PHP   7. Magento\Framework\ObjectManager\ObjectManager->create() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Factory/AbstractFactory.php:128
+[06-Feb-2018 10:09:36 UTC] PHP   8. Magento\Framework\ObjectManager\Factory\Dynamic\Developer->create() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/ObjectManager.php:57
+[06-Feb-2018 10:09:36 UTC] PHP   9. Magento\Framework\ObjectManager\Definition\Runtime->getParameters() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Factory/Dynamic/Developer.php:71
+[06-Feb-2018 10:09:36 UTC] PHP  10. Magento\Framework\Code\Reader\ClassReader->getConstructor() /home/beeyoung/public_html/dev/vendor/magento/framework/ObjectManager/Definition/Runtime.php:44
+[06-Feb-2018 10:09:36 UTC] PHP  11. ReflectionClass->__construct() /home/beeyoung/public_html/dev/vendor/magento/framework/Code/Reader/ClassReader.php:19
+[06-Feb-2018 10:09:36 UTC] PHP  12. spl_autoload_call() /home/beeyoung/public_html/dev/vendor/magento/framework/Code/Reader/ClassReader.php:19
+[06-Feb-2018 10:09:36 UTC] PHP  13. Composer\Autoload\ClassLoader->loadClass() /home/beeyoung/public_html/dev/vendor/magento/framework/Code/Reader/ClassReader.php:19
+[06-Feb-2018 10:09:36 UTC] PHP  14. Composer\Autoload\includeFile() /home/beeyoung/public_html/dev/vendor/composer/ClassLoader.php:322

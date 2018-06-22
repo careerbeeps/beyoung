@@ -107,8 +107,8 @@ body.cms-home .hmwhycusk { display:block; margin-top:20px;}
 .page-footer{}
 .thvall{float:right;color:#FFF !important;background:#000;padding:5px 10px;border-radius:4px;margin-bottom:0px;transition:all 0.5s;-webkit-transition:all 0.5s;-moz-transition:all 0.5s;-o-transition:all 0.5s;-ms-transition:all 0.5s;font-weight:bold;letter-spacing:1px;font-size:14px;margin-top:10px;border:solid 1px #000;}
 .thvall:hover{color:#000 !important;background:#FFF;border:solid 1px #000;}
-.page-footer a{transition:all 0.5s;-webkit-transition:all 0.5s;-moz-transition:all 0.5s;-o-transition:all 0.5s;-ms-transition:all 0.5s;font-family:'montserratmedium' !important;}
-.page-footer a:hover{color:#000 !important;padding-left:10px;}
+.page-footer a{transition:all 0.5s;-webkit-transition:all 0.5s;-moz-transition:all 0.5s;-o-transition:all 0.5s;-ms-transition:all 0.5s;font-family:'montserratmedium' !important;position: relative;}
+.page-footer a:hover{color:#000 !important;padding-left:15px;}
 .page-footer a:hover::before{position:absolute;left:0px;content:'\25ba';font-size:12px;color:#666;margin-top:0px;}
 .em-banners-item img{transition:all 0.5s;-webkit-transition:all 0.5s;-moz-transition:all 0.5s;-o-transition:all 0.5s;-ms-transition:all 0.5s;}
 .em-banners-item img:hover{-webkit-filter:brightness(80%);-moz-filter:brightness(80%);-o-filter:brightness(80%);-ms-filter:brightness(80%);filter:brightness(80%);border-radius:10px;}
@@ -1211,12 +1211,12 @@ h2#ladka_footer {width: 80% !important;}
 }*/
 
 	.shiv1{
-	border: 0;
-	margin-bottom: 30px;
-    padding-top: 24px;
-    	}
+	    border: 0;
+	    margin-bottom: 10px;
+	    background: #f5f5f5;
+    }
 	
-	.shiv2{
+	/*.shiv2{
 	max-height: 220px;
     margin: 30px 0;
     -webkit-column-count: 4;
@@ -1225,6 +1225,9 @@ h2#ladka_footer {width: 80% !important;}
     margin-left: 15px;
     column-count: 10;
     column-gap: 20px;
+	}*/
+	.shiv2 {
+	    padding: 15px;
 	}
 	
 	.shiv3 a {
@@ -1256,14 +1259,20 @@ h2#ladka_footer {width: 80% !important;}
 	.product-options-bottom .price-box .old-price .price-container>span, .product-info-price .price-box .old-price .price-container>span {
 		    display: inline-block !important;
 	}
-	
-	h2#ladka_footer{
-	border-bottom: solid 3px #666;
-    width: 33%;
-    cursor: pointer;
+	h2#ladka_footer {
+	    cursor: pointer;
+	    max-width: 200px;
+	    margin-bottom: 0;
+	    text-align: center;
+	    color: #FFF;
+	    padding: 10px;
+	    background: #000;
 	}
-	#shiva{
-		    overflow-x: auto;
+	.initiallyHidden {
+	    display: none;
+	}
+	#shiva {
+	    border-top: 1px solid;
 	}
 	
 	.page-footer .footer-bottom .widget.block{

@@ -29,12 +29,16 @@
 		<?php $i=0; ?>	
 		<?php foreach ($data_image as $image) : ?>
 			<div class="ms-slide">
-				<img src="pub/media/emthemes/style/blank.gif" data-src="<?php echo $block->imageResize($image["image"],$w,$h); ?>" alt="" title="<?php echo $image[$name] ?>"/>   
-				<a href="<?php echo $image["url"] ?>"></a>
 				<?php 
 					$number_description=(int)$image["number-description"];
 				?>
 				<?php for($j=1;$j<=$number_description;$j++) : ?>
+				<img src="pub/media/emthemes/style/blank.gif" data-src="<?php echo $block->imageResize($image["image"],$w,$h); ?>" alt="<?php 
+						$name="description".$j;
+						echo $image[$name];
+					?>" title="<?php echo $image[$name] ?>"/>   
+				<a href="<?php echo $image["url"] ?>"></a>
+				
 				<div class="ms-layer ms-caption" data-type="text" data-duration="<?php echo $data_effect[$i]["showduration".$j] ?>" data-delay="<?php echo $data_effect[$i]["showdelay".$j] ?>" data-ease="<?php echo $data_effect[$i]["showease".$j] ?>" data-effect="<?php echo $data_effect[$i]["showeffect".$j] ?>"  data-hide-effect="<?php echo $data_effect[$i]["hideeffect".$j] ?>"  data-hide-time="<?php echo $data_effect[$i]["hidetime".$j] ?>"  data-hide-duration="<?php echo $data_effect[$i]["hideduration".$j] ?>"  data-hide-ease="<?php echo $data_effect[$i]["hideease".$j] ?>"      data-offset-x = "<?php echo $data_effect[$i]["offset_x".$j] ?>"
 					 data-offset-y="<?php echo $data_effect[$i]["offset_x".$j]?>"  data-origin="<?php echo $data_effect[$i]["origin".$j] ?>"   >
 					<?php 

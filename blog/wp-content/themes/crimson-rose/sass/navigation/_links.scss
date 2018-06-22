@@ -1,0 +1,31 @@
+a {
+	outline: none;
+	text-decoration: none;
+
+	&,
+	&:focus,
+	&:active,
+	&:visited {
+		color: $color__text;
+	}
+
+	&:focus {
+		outline: none;
+	}
+	&:hover,
+	&:active {
+		outline: none;
+	}
+}
+
+.widget p >,
+.entry-summary,
+.entry-content {
+	a {
+		text-decoration: underline;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}

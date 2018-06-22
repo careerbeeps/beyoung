@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magebay_Pdc::pdc_manage" title="Product Designer" sortOrder="100">
+					<!-- <resource id="Magebay_Pdc::pdc_manage" title="Product Designer"/> -->
+					<resource id="Magebay_Pdc::manage_image" title="Images Library"/>
+					<resource id="Magebay_Pdc::manage_image_categories" title="Manage Categories"/>
+					<resource id="Magebay_Pdc::manage_image_images" title="Manage Images"/>
+					<resource id="Magebay_Pdc::manage_font_color" title="Fonts and Colors"/>
+					<resource id="Magebay_Pdc::manage_font" title="Fonts Library"/>
+					<resource id="Magebay_Pdc::manage_colors" title="Colors Library"/>
+				</resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Magebay_Pdc::manage_system_pdc" title="PDC Configuration"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

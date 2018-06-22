@@ -1,0 +1,9 @@
+
+<div class="pdc-wrapper" ng-app="pdcApp">
+<?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/load_fonts.phtml')->toHtml(); ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-view></div>
+        </div>
+    </div>
+</div>

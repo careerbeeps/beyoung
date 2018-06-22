@@ -1,0 +1,61 @@
+<?php
+$asset_repository = $this->assetRepository;
+$x3Js = array(
+    'pdc/jquery/jquery-1.10.2.min.js',
+    'pdc/jquery/colorpicker/colorpicker.js',
+    'pdc/fabricjs/fabric.js',
+    'pdc/dropzone/dropzone.min.js',
+    'pdc/bootstrap/js/bootstrap.min.js',
+    'pdc/fancybox/jquery.fancybox.js',
+    'pdc/x3/js/jquery.imagelistexpander.js',
+    'pdc/scrollbar/jquery.scrollbar.js',
+    'pdc/pace/pace.min.js'
+);
+$x3Css = array(
+	'pdc/jquery/jcrop/jquery.jcrop.min.css',
+    'pdc/dropzone/dropzone.css',
+    'pdc/pace/dataurl.css',
+    //'pdc/bootstrap/css/bootstrap.min.css',
+    //'pdc/bootstrap/css/bootstrap.vertical-tabs.css',
+    //'pdc/x3/css/imagelistexpander.css',
+    //'pdc/scrollbar/jquery.scrollbar.css',
+    //'pdc/x3/css/pdc-x3.css',
+    'pdc/jquery/colorpicker/css/colorpicker.css',
+    'pdc/pdc/css/pdc.layer.css',
+    'pdc/bootstrap/css/bootstrap-theme.min.css',
+    'pdc/font-awesome-4.4.0/css/font-awesome.min.css',
+    'pdc/curvedtext/css/style.css'
+);
+?>
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/pplus/style.css') ?>
+<link rel="stylesheet" type="text/css"  href="<?php echo $asset->getUrl() ?>" />
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/bootstrap/css/bootstrap.min.css') ?>
+<link rel="stylesheet" type="text/css"  href="<?php echo $asset->getUrl() ?>" />
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/bootstrap/css/bootstrap.vertical-tabs.css') ?>
+<link rel="stylesheet" type="text/css"  href="<?php echo $asset->getUrl() ?>" />
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/x3/css/imagelistexpander.css') ?>
+<link rel="stylesheet" type="text/css"  href="<?php echo $asset->getUrl() ?>" />
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/scrollbar/jquery.scrollbar.css') ?>
+<link rel="stylesheet" type="text/css"  href="<?php echo $asset->getUrl() ?>" />
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/x3/css/pdc-x3.css') ?>
+<link rel="stylesheet" type="text/css"  href="<?php echo $asset->getUrl() ?>" />
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/x3/css/mobile-320.css') ?>
+<link rel="stylesheet" type="text/css" media="only screen and (max-width: 339px)" href="<?php echo $asset->getUrl() ?>" />
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/x3/css/mobile-480.css') ?>
+<link rel="stylesheet" type="text/css" media="only screen and (min-width: 340px) and (max-width: 767px)" href="<?php echo $asset->getUrl() ?>" />
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/x3/css/tablet-768.css') ?>
+<link rel="stylesheet" type="text/css" media="screen and (min-width: 768px) and (max-width: 1023px)" href="<?php echo $asset->getUrl() ?>" />
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/x3/css/laptop-1024.css') ?>
+<link rel="stylesheet" type="text/css" media="screen and (min-width: 1024px) and (max-width: 1260px)" href="<?php echo $asset->getUrl() ?>" />
+<!-- Add fancyBox main JS and CSS files -->
+<?php $asset  = $asset_repository->createAsset('Magebay_Pdc::pdc/fancybox/jquery.fancybox.css') ?>
+<link rel="stylesheet" type="text/css" href="<?php echo $asset->getUrl() ?>" media="screen" />
+
+<?php foreach($x3Css as $cssFile) : ?>
+    <?php $asset  = $asset_repository->createAsset('Magebay_Pdc::' . $cssFile); ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $asset->getUrl() ?>" />
+<?php endforeach; ?>
+<?php foreach($x3Js as $jsFile) : ?>
+    <?php $asset  = $asset_repository->createAsset('Magebay_Pdc::' . $jsFile); ?>
+    <script src="<?php echo $asset->getUrl() ?>"></script>
+<?php endforeach; ?>

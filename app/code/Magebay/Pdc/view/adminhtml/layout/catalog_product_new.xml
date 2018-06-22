@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Magebay_Pdc::pdc/fancybox/jquery.fancybox.css" />
+	</head>
+	<!--<body>
+        <referenceBlock name="product_tabs">
+            <block class="Magebay\Pdc\Block\Adminhtml\Product\Edit\Tab" name="product.pdc">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Product Designer Canvas</argument>
+                    <argument name="group_code" xsi:type="string">basic</argument>
+                </arguments>
+            </block>
+            <action method="addTab">
+                <argument name="name" xsi:type="string">product-pdc</argument>
+                <argument name="block" xsi:type="string">product.pdc</argument>
+            </action>
+        </referenceBlock>
+		<referenceBlock name="product_form">
+            <block class="Magebay\Pdc\Block\Adminhtml\Product\Edit\From" name="product.booking.system">
+                <arguments>
+                    <argument name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Product Designer Canvas</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="opened" xsi:type="boolean">false</item>
+                        <item name="sortOrder" xsi:type="string">20</item>
+                        <item name="canShow" xsi:type="boolean">true</item>
+                        <item name="componentType" xsi:type="string">fieldset</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>-->
+</page>

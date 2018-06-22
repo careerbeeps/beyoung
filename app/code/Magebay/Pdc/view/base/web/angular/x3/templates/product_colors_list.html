@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-24">
+            <h3 style="margin: 7px 0px;"> <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Product Colors </h3>
+        </div>
+        <div class="col-lg-24">
+            <div class="pull-right">
+                <!--<a class="btn btn-primary" ng-click="backOrCancel()"> <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> <span>Back</span> </a> -->
+                <a class="btn btn-success btn-sm" ng-click="updateProductColor()"> <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> <span>Update Product Color Info</span> </a> 
+                <pbp-loading ng-if="isSaving"></pbp-loading>
+                <a class="btn btn-warning btn-sm" ng-click="backOrCancel()"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <span>Cancel</span> </a> 
+            </div>
+        </div>
+    </div>
+    <div class="row main-content">
+        <div class="col-lg-24">            
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> 
+                        <span>{{color_label.color_traslate.list_color_label}}</span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p style="text-align: center;"><pdc-loadingbar ng-if="!productColorInfo"></pdc-loadingbar></p>
+                    <!--<pre>{{productColorInfo | json}}</pre>-->
+                    <form ng-if="productColorInfo" id="product_color_list_form" method="POST" action="{{ baseUrl + 'pdc/designarea/updateproductcolor/'}}">
+                        <input type="hidden" name="product_id" value="{{product_id}}"/>
+                        <table class="table table-striped">
+                            <tr>
+                                <td>{{color_label.color_traslate.color_name}}</td>
+                                <td>{{color_label.color_traslate.color_hex}}</td> 
+                                <td>{{color_label.color_traslate.img_bg_mask}}</td>
+                                <td>{{color_label.color_traslate.color_position}}</td>
+                                <td>{{color_label.color_traslate.color_action}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name="default_side[color_name]" value="" ng-model="default_color_name"/>
+                                </td>
+                                <td><input type="text" colorpicker style="background:#{{default_color_code.replace('#', '')}}" id="default_color_code" name="default_side[color_code]" ng-model="default_color_code" value=""/></td>
+                                <td>
+                                    <div class="list-group">
+                                        <a class="list-group-item" ng-repeat="defaultSide in productColorInfo.default_side">
+                                            <h4 class="list-group-item-heading">{{defaultSide.label}}</h4>
+                                            <p class="list-group-item-text">
+                                                <input type="hidden" name="default_side[id][]" value="{{defaultSide.id}}"/>
+                                                <img class="img-thumbnail" src="{{productColorInfo.media_url + defaultSide.filename}}" width="150px"/>
+                                                <img class="img-thumbnail" src="{{productColorInfo.media_url + defaultSide.overlay}}" width="150px"/>
+                                            </p>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>0</td>
+                                <td></td>
+                            </tr>
+                            <tr ng-repeat="colorSide in productColorInfo.product_color_sides">
+                                <td><input type="text" name="color_name[{{colorSide.id}}]" value="{{colorSide.color_name}}"/></td>
+                                <td><input colorpicker type="text" style="background: #{{colorSide.color_code.replace('#', '')}}" id="color_code_{{colorSide.id}}" name="color_code[{{colorSide.id}}]" value="{{colorSide.color_code}}"/></td>
+                                <td>
+                                    <div class="list-group">
+                                        <a class="list-group-item" ng-repeat="colorImageItem in colorSide.images">
+                                            <h4 class="list-group-item-heading">{{colorImageItem.label}}</h4>
+                                            <p class="list-group-item-text">
+                                                <img class="img-thumbnail" src="{{productColorInfo.media_url + colorImageItem.filename}}" width="150px"/>
+                                                <img class="img-thumbnail" src="{{productColorInfo.media_url + colorImageItem.overlay}}" width="150px"/>
+                                            </p>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td><input type="text" name="position[{{colorSide.id}}]" value="{{colorSide.position}}"/></td>
+                                <td>
+                                    <a class="btn btn-sm btn-warning" id="delete_color_{{colorSide.id}}" ng-click="deleteProductColor(colorSide.id)">Delete</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

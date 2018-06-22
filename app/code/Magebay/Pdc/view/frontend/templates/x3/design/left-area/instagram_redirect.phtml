@@ -1,0 +1,10 @@
+<?php 
+$client_id = trim($block->getFieldSetting('pdp/customer_action/instagram_api')); 
+$client_secret = trim($block->getFieldSetting('pdp/customer_action/instagram_key')); 
+$redirect_uri = $this->getUrl().'pdc/index/instagram';
+$code = $this->getRequest()->getParam('code','');
+$instagram = new \InstagramUploader($client_id,$client_secret,$redirect_uri,$code);
+$instagram->init();
+echo '<script type="text/javascript" src="'.$block->getX3JsUlr().'/jquery/jquery-1.10.2.min.js"></script>';
+echo '<script type="text/javascript" src="'.$block->getX3JsUlr().'/instagram/pdc_ins_results.js"></script>'; 
+?>

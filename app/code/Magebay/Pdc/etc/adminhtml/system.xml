@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="pdp" translate="label" sortOrder="200">
+            <label>Products Designer Canvas</label>
+        </tab>
+        <section id="pdp" translate="label" type="text" sortOrder="110" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <label>Settings (PDC - X3)</label>
+            <tab>pdp</tab>
+            <resource>Magebay_Pdc::pdc_manage</resource>
+            <group id="info" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <frontend_model>Magebay\Pdc\Block\Adminhtml\Form\Renderer\Config\Magebay</frontend_model>
+            </group>
+            <group id="act" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Active License Key</label>
+                <field id="key" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>License Key</label>
+                    <backend_model>Magebay\Pdc\Model\Config\Backend\Saveconfig</backend_model>
+                    <comment>Please check your license key in order details. Contact to provider when you would like to reset the license key to apply PDC for new domain.</comment>
+                </field>
+                <field id="actinfo" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Active Status</label>
+                    <frontend_model>Magebay\Pdc\Block\Adminhtml\Form\Renderer\Config\Activestatus</frontend_model>
+                </field>
+            </group>
+            <group id="setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Enable Products Design Canvas - X3</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable PDC X3</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="design_button_label" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Design Button Label</label>
+                </field>
+				<field id="adminemail" translate="label comment" type="text" sortOrder="21" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Admin Email</label>
+                </field>
+            </group>
+            <group id="customer_action" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Customer Actions Setting</label>
+                <field id="design_details" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show Design Details Modal</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Ask logged in customer to enter design title and design description when press <b>CONTINUE SHOPPING</b> button.]]></comment>
+                </field>
+                <field id="sharing" translate="label comment" type="select" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Social Sharing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Allow customer sharing their customized design to social network.</comment>
+                </field>
+                <field id="is_facebook" translate="label comment" type="select" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow Get Facebook Photo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="facebook_api" translate="label comment" type="text" sortOrder="13" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Facebook API</label>
+                    <comment><![CDATA[<p>Enter Facebook API.</p>]]></comment>
+                    <depends>
+                        <field id="is_facebook">1</field>
+                    </depends>
+                </field>
+                <field id="facebook_key" translate="label comment" type="text" sortOrder="14" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Facebook Secret Key</label>
+                    <comment><![CDATA[<p>Enter Secret Key.</p>]]></comment>
+                    <depends>
+                        <field id="is_facebook">1</field>
+                    </depends>
+                </field>
+                <field id="is_instagram" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow Get Instagram Photo</label>
+                    <comment><![CDATA[<p><strong>YES</strong> to allow user get photos from their Instagram account. (Available on <b>Pro</b> and <b>ENTERPRISE</b> version)</p>]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="instagram_api" translate="label comment" type="text" sortOrder="31" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Instagram API</label>
+                    <comment><![CDATA[<p>Enter Instagram API.</p>]]></comment>
+                    <depends>
+                        <field id="is_instagram">1</field>
+                    </depends>
+                </field>
+                <field id="instagram_key" translate="label comment" type="text" sortOrder="32" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Instagram Key</label>
+                    <comment><![CDATA[<p>Enter Instagram Key.</p>]]></comment>
+                    <depends>
+                        <field id="is_instagram">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="custom_upload" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Upload Image Setting</label>
+                <field id="default_message" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Default Message</label>
+                    <comment><![CDATA[The message that gets displayed before any files are dropped. This is normally replaced by an image but defaults to "Drop files here to upload"]]></comment>
+                </field>
+                <field id="upload_max_size" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Max size allowed (in MB)</label>
+                    <comment><![CDATA[Limit user upload large file.This size should equal or less than the <b>upload_max_fiesize</b> ini php.ini. Set to 0 to not restrict]]></comment>
+                </field>
+                <field id="upload_max_size_message" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Max size error message</label>
+                    <comment><![CDATA[Shown when the file is too big]]></comment>
+                </field>
+                <field id="upload_max_files" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Max files</label>
+                    <comment>How many files upload once</comment>
+                </field>
+                <field id="upload_max_files_message" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Max files error message</label>
+                    <comment><![CDATA[If max files is set, this will be the error message when it's exceeded]]></comment>
+                </field>
+                <field id="upload_min_pixel_width" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Minimum width image (pixel)</label>
+                    <comment><![CDATA[Request user upload high quality image. Leave empty to not restrict]]></comment>
+                </field>
+                <field id="upload_min_pixel_height" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Minimum height image (pixel)</label>
+                    <comment><![CDATA[Request user upload high quality image. Leave empty to not restrict]]></comment>
+                </field>
+                <field id="upload_min_dpi" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Minimum DPI require</label>
+                    <comment><![CDATA[Request user upload high resolution image. This feature require <b>imagick extension</b> installed]]></comment>
+                </field>
+                <field id="upload_min_dpi_message" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Minimum DPI require</label>
+                    <comment><![CDATA[This message will show if user use low resolution images or small images]]></comment>
+                </field>
+                <field id="remove_label" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Remove button label</label>
+                    <comment><![CDATA[The text to be used to remove a file]]></comment>
+                </field>
+                <field id="cancel_label" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cancel button label</label>
+                    <comment><![CDATA[The text to be used for the cancel upload link]]></comment>
+                </field>
+            </group>
+            <group id="watermark" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Watermark</label>
+                <field id="active" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Watermark</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="image" translate="label comment" type="image" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Watermark</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Image</backend_model>
+                    <upload_dir config="system/filesystem/media" scope_info="1">pdp/images</upload_dir>
+                    <base_url type="media" scope_info="1">pdp/images</base_url>
+                </field>
+                <field id="position" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Watermark Position</label>
+                    <source_model>Magebay\Pdc\Model\Config\Watermarkposition</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

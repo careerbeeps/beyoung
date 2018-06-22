@@ -1,0 +1,47 @@
+#pdc_ctext_tool {
+  border: 0 solid #cccccc;
+  text-align: center;
+}
+#pdc_ctext_convert {
+  background: #00a0c6 none repeat scroll 0 0;
+  border: 0 solid #cccccc;
+  color: #ffffff;
+  font-size: 17px;
+  line-height: 40px;
+  padding: 0;
+  width: 100%;
+}
+#pdc_text_curved_control div {
+  border-top: 1px solid #ccc;
+  padding: 10px 0;
+  text-align: left;
+}
+#pdc_text_curved_control {}
+#pdc_text_curved_control div label {
+  float: left;
+  line-height: 20px;
+  margin: 0 0 -1px;
+  padding: 0;
+  width: 70px;
+}
+.pdc-text-effect-control input.input-number{
+    border: 1px solid #ccc;
+	height: 30px;
+	text-align: center;
+	width: 70px;
+}
+#pdc_ctext_radius, #pdc_ctext_spacing, #text_small_font, #text_large_font {
+    margin: 5px 10px 0 0;
+}
+.pdc-text-effect-control {
+  border-top: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+
+
+
+
+
+
+

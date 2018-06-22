@@ -1,0 +1,130 @@
+
+<?php $collection = $this->getCustomerdesign(); ?>
+<style>
+    #pdc_design_list td, th {
+        text-align: center;
+    }
+    #pdc_design_list td img {
+        margin: auto;
+    }
+    #pdc_design_list td .design-title {
+        font-weight: bold;
+    }
+    #pdc_design_list td a {
+        cursor: pointer;
+    }
+</style>
+<?php //echo $this->getLayout()->createBlock("core/template")->setTemplate("pdp/action/load_fonts.phtml")->toHtml() ?>
+<div class="page-title">
+    <h1><?php echo __('My customized design') ?></h1>
+</div>
+<?php if(count($collection)) : ?>
+<?php echo $this->getPagerHtml(); ?>
+<table class="data-table" id="pdc_design_list">
+    <thead>
+        <tr>
+            <th><?php echo __('Design Preview') ?></th>
+            <th><?php echo __('Design Details') ?></th>
+            <th><span class="nobr"><?php echo __('Created Time') ?></span></th>
+            <th><?php echo __('Action') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($collection as $_obj): ?>
+        <tr>
+            <?php
+            $thumbnails = $this->getPdcHelper()->getThumbnailImage($_obj->getFilename());
+            $productId = $_obj->getProductId();
+            $designLink = $this->getDesignLink($_obj->getId(), $productId);
+            ?>
+            <td>
+                <div class="design-preview">
+                    <ul>
+                        <?php foreach($thumbnails as $thumbnail) : ?>
+                        <li>
+                            <p style="text-align: left;"><?php echo $thumbnail['name'] ?></p>
+                            <div class="pdc-svg-preview" style="border: 1px solid #ccc;line-height: 100%;margin: 5px 0; width: 200px;"><?php echo $thumbnail['image'] ?></div>
+                        
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+			</td>
+			<td class="design-detail-row-<?php echo $_obj->getId() ?>">
+                <p><span class="design-title"><?php echo ($_obj->getDesignTitle())? $_obj->getDesignTitle() : __("Untitled");  ?></span></p>
+                <p><?php echo nl2br($_obj->getDesignNote()) ?></p>
+                <div class="edit-item" style="display: none;">
+                    <p>
+                        <span><?php echo __("Design Name") ?></span><br/>
+                        <input type="text" class="edit-design-title" value="<?php echo $_obj->getDesignTitle() ?>" id="design_title_<?php echo $_obj->getId() ?>"/>
+                    </p>
+                    <p>    
+                        <span><?php echo __("Design Description") ?></span><br/>
+                        <textarea class="edit-design-description"><?php echo $_obj->getDesignNote() ?></textarea>
+                    </p>
+                </div>
+                <br/>
+                <p>
+                    <button class="edit-design button edit-mode"><?php echo __("Edit Details") ?></button>
+                    <button type="button" rel="<?php echo $_obj->getId() ?>" class="button save-mode save-design-details" style="display: none;"><?php echo __("Save Details") ?></button>
+                    <button type="button" class="button save-mode cancel-edit" style="display: none;"><?php echo __("Cancel") ?></button>
+                </p>
+            </td>
+            <td><?php echo $_obj->getCreatedTime() ?></td>
+			<td>
+                <p><a target="_blank" href="<?php echo $designLink ?>"><?php echo __("Edit") ?></a></p>
+                <p><a class="deletel-design" id="delete_<?php echo $_obj->getId() ?>"><?php echo __("Delete") ?></a></p>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<input type="hidden" value="<?php echo $this->getPdcHelper()->getPdpBaseUrl() ?>" id="base_url"/>
+<script>
+require([
+			'jquery'
+		],
+	function ($){
+		 $(document).on("click", ".edit-design", function() {
+            var rowElement = $(this).closest("td");
+            rowElement.find(".edit-item").show();
+            rowElement.find(".save-mode").show();
+            rowElement.find(".edit-mode").hide();
+        });
+        $(document).on("click", ".cancel-edit", function() {
+            var rowElement = $(this).closest("td");
+            rowElement.find(".edit-item").hide();
+            rowElement.find(".save-mode").hide();
+            rowElement.find(".edit-mode").show();
+        });
+        $(document).on("click", ".save-design-details", function() {
+            var rowElement = $(this).closest("td");
+            var designTitle = rowElement.find(".edit-design-title").val(),
+                designDes = rowElement.find(".edit-design-description").val(),
+                designId = $(this).attr("rel");
+            window.location = $("#base_url").val() + "pdc/customerdesign/updateDesignDetails/id/" + designId + "/title/" + designTitle + "/note/" + designDes; 
+        });
+	});
+</script>
+<?php /*<script type="text/javascript">decorateTable('pdc_design_list');</script> */ ?>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo __('You have no customized product!'); ?></p>
+<?php endif ?>
+<script>
+require([
+			'jquery'
+		],
+	function ($){
+		$('.deletel-design').click(function(){
+			var deleteLink = "<?php echo $this->getPdcHelper()->getPdpBaseurl() . "pdc/customerdesign/delete/id/" ?>";
+				if(!confirm("<?php echo __("Are you sure?") ?>")) {
+				return false;
+			}
+			var itemId = $(this).attr('id');
+			itemId = itemId.substr(7);
+			window.location = deleteLink + itemId;
+		})
+})
+</script>

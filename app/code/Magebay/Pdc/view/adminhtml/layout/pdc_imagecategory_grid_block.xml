@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="admin.block.pdc.imagecategory.grid.container">
+            <block class="Magento\Backend\Block\Widget\Grid" name="admin.block.pdc.imagecategory.grid" as="grid">
+
+                <arguments>
+                    <argument name="id" xsi:type="string">imageCategoryGrid</argument>
+                    <argument name="dataSource" xsi:type="object">Magebay\Pdc\Model\ResourceModel\Imagecategory\Collection</argument>
+                    <argument name="default_sort" xsi:type="string">id</argument>
+                    <argument name="default_dir" xsi:type="string">desc</argument>
+                    <argument name="save_parameters_in_session" xsi:type="boolean">true</argument>
+                    <argument name="use_ajax" xsi:type="boolean">true</argument>
+                </arguments>
+                <block class="Magento\Backend\Block\Widget\Grid\Massaction" name="pdc.imagecategory.grid.massaction" as="grid.massaction">
+                    <arguments>
+                        <argument name="massaction_id_field" xsi:type="string">id</argument>
+                        <argument name="form_field_name" xsi:type="string">imagecategory_ids</argument>
+                        <argument name="use_select_all" xsi:type="string">1</argument>
+                        <argument name="options" xsi:type="array">
+                            <item name="delete" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Delete</item>
+                                <item name="url" xsi:type="string">pdc/imagecategory/massDelete</item>
+                                <item name="confirm" xsi:type="string" translate="true">Are you sure you want to delete the items?</item>
+                            </item>
+                            <item name="change_status" xsi:type="array">
+                                <item name="label" xsi:type="string" translate="true">Change Status</item>
+                                <item name="url" xsi:type="string">pdc/imagecategory/massStatus</item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+                
+                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" name="admin.block.pdc.imagecategory.grid.columnSet" as="grid.columnSet">
+
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="id">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">ID</argument>
+                            <argument name="type" xsi:type="string">number</argument>
+                            <argument name="id" xsi:type="string">id</argument>
+                            <argument name="index" xsi:type="string">id</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="title">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Title</argument>
+                            <argument name="type" xsi:type="string">string</argument>
+                            <argument name="id" xsi:type="string">title</argument>
+                            <argument name="index" xsi:type="string">title</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="image_types">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Image Types</argument>
+                            <argument name="index" xsi:type="string">image_types</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="options" xsi:type="options" model="Magebay\Pdc\Model\Imagecategory\Grid\Imagetypes"/>
+                            <argument name="renderer" xsi:type="string">Magebay\Pdc\Block\Adminhtml\Imagecategory\Grid\Renderer\Imagetypes</argument>
+                            <argument name="header_css_class" xsi:type="string">col-form_id</argument>
+                            <argument name="column_css_class" xsi:type="string">ccol-form_id</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="position">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Position</argument>
+                            <argument name="type" xsi:type="string">string</argument>
+                            <argument name="id" xsi:type="string">position</argument>
+                            <argument name="index" xsi:type="string">position</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="status">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Status</argument>
+                            <argument name="index" xsi:type="string">status</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="options" xsi:type="options" model="Magebay\Pdc\Model\Imagecategory\Grid\Status"/>
+                            <argument name="renderer" xsi:type="string">Magebay\Pdc\Block\Adminhtml\Imagecategory\Grid\Renderer\Status</argument>
+                            <argument name="header_css_class" xsi:type="string">col-form_id</argument>
+                            <argument name="column_css_class" xsi:type="string">ccol-form_id</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="action">
+                        <arguments>
+                            <argument name="id" xsi:type="string">action</argument>
+                            <argument name="header" xsi:type="string" translate="true">Action</argument>
+                            <argument name="type" xsi:type="string">action</argument>
+                            <argument name="getter" xsi:type="string">getId</argument>
+                            <argument name="filter" xsi:type="boolean">false</argument>
+                            <argument name="sortable" xsi:type="boolean">false</argument>
+                            <argument name="actions" xsi:type="array">
+                                <item name="view_action" xsi:type="array">
+                                    <item name="caption" xsi:type="string" translate="true">Edit</item>
+                                    <item name="url" xsi:type="array">
+                                        <item name="base" xsi:type="string">*/*/edit</item>
+                                    </item>
+                                    <item name="field" xsi:type="string">id</item>
+                                </item>
+                            </argument>
+                            <argument name="header_css_class" xsi:type="string">col-actions</argument>
+                            <argument name="column_css_class" xsi:type="string">col-actions</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

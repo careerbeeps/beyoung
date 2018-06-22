@@ -1,0 +1,18 @@
+@media screen and (max-width: 767px) and (min-width: 645px) {
+.columns .sidebar-main{
+    top: 0px !important;
+    position: absolute !important;
+}
+.sidebar.sidebar-main{
+    width: 100%;
+}
+.block-content.filter-content{
+        margin-top: 31px;
+}
+.block.filter.active .block-content.filter-content{
+    display: block;
+}
+.block.filter .block-content.filter-content{
+    display: none;
+}
+}

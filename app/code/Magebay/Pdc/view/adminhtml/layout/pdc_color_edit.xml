@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Magebay_Pdc::pdc/jquery/colorpicker/css/colorpicker.css" />
+	</head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magebay\Pdc\Block\Adminhtml\Color\Edit" name="pdc_color_edit"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="\Magento\Backend\Block\Template" name="add_color_picker" template="Magebay_Pdc::pdp/color/colorpicker.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

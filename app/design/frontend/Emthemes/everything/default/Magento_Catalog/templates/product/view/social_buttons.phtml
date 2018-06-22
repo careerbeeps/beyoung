@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_product = $block->getProduct();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+?>
+
+
+
+<div class="em-addthis">
+      <a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&amp;title=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" target="_blank" style="color:#3b5998 !important;" class="uphov">
+	      <span class="icon-facebook fa fa-facebook"></span>
+      </a> 
+      <a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&amp;title=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" target="_blank" style="color:#1ea1f3 !important;" class="uphov">
+	      <span class="icon-twitter fa fa-twitter"></span>
+      </a>
+      
+      <a href="https://api.addthis.com/oexchange/0.8/forward/google_plusone_share/offer?url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&amp;title=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" target="_blank" style="color:#e84234 !important;" class="uphov">
+	      <span class="icon-google fa fa-google-plus"></span>
+	</a>
+
+        <a href="whatsapp://send?text=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>" target="_blank" class='whatsapp_mobile uphov' style="background:url('https://beyoung.in/pub/media/wysiwyg/whatsappgreen.png') no-repeat;background-position: center;">
+            <span class="" aria-hidden="true">&nbsp;&nbsp;</span>
+
+      </a>
+      <a href="https://web.whatsapp.com/send?text=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>" target="_blank" class='whatsapp_web uphov' style="background:url('https://beyoung.in/pub/media/wysiwyg/whatsappgreen.png') no-repeat;background-position: center;">
+           <span class="" aria-hidden="true">&nbsp;&nbsp;</span>
+
+      </a>
+     
+</div>  

@@ -1,0 +1,14 @@
+<?php 
+$item = $block->getItem();
+$buyRequest = $item->getBuyRequest()->getData();
+if (!(isset($buyRequest['extra_options']) && $buyRequest['extra_options'] != "")) {
+    return false;
+}
+$itemId = $item->getId();
+$orderId = $item->getOrderId();
+$productId = $item->getProductId();
+?>		
+<div id='customize-<?php echo $itemId ?>' class='view-customize-design'>
+    <span><?php echo __('Customize Design') ?>:</span>
+    <p><a class='pdp-order-item' href='#' itemid='<?php echo $itemId ?>' productid='<?php echo $productId ?>' orderid='<?php echo $orderId ?>'><?php echo __('View Customize Design') ?></a></p>    
+</div>

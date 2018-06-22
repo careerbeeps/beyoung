@@ -1,0 +1,25 @@
+<?php 
+$orderItems = $this->getOrderItems();
+?>
+<?php if(count($orderItems)) : ?>
+	<table bgcolor="#FFFFFF" cellspacing="0" cellpadding="10" border="0" width="650" style="border:1px solid #E0E0E0;">
+		<tr>
+			<th style="text-align: left">
+			<?php echo __('Product Name') ?>
+			</th>
+			<th style="text-align: left">
+				<?php echo __('Product Sku') ?>
+			</th>
+			<th style="text-align: left">
+				<?php echo __('Link Design') ?>
+			</th>
+		</tr>
+		<?php foreach($orderItems as $orderItem) : ?>
+			<tr>
+				<td><?php echo $orderItem['product_name']; ?></td>
+				<td><?php echo $orderItem['product_sku']; ?></td>
+				<td><a href="<?php echo $this->getUrl() ?>pdc/view/viewdesign/json/<?php echo $orderItem['file_name']; ?>"><?php echo __('View Design') ?></a></td>
+			</tr>
+		<?php endforeach; ?>
+	</table>
+<?php endif; ?>

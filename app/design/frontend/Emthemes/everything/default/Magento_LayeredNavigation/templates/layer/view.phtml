@@ -1,0 +1,107 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+?>
+
+<?php if ($block->canShowBlock()){ ?>
+    <div class="block filter" id="layered-filter-block" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false, "collateral": { "openedState": "filter-active", "element": "body" } }}'>
+        <?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
+        <div class="block-title filter-title" data-count="<?php /* @escapeNotVerified */ echo $filtered; ?>">
+            <strong data-role="title"><?php /* @escapeNotVerified */ echo __('Shop By') ?></strong>
+        </div>
+        <div class="block-content filter-content">
+            <?php echo $block->getChildHtml('state') ?>
+
+            <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                <div class="block-actions filter-actions">
+                    <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>" class="action clear filter-clear"><span><?php /* @escapeNotVerified */ echo __('Clear All') ?></span></a>
+                </div>
+            <?php endif; ?>
+            <?php $wrapOptions = false; ?>
+            <?php foreach ($block->getFilters() as $filter): ?>
+                <?php if ($filter->getItemsCount()): ?>
+                    <?php if (!$wrapOptions): ?>
+                        <!--<strong role="heading" aria-level="2" class="block-subtitle filter-subtitle <?php echo $filter->getName()?>theme"><?php /* @escapeNotVerified */ echo __('Shopping Options') ?></strong>-->
+                        <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+                    <?php  $wrapOptions = true; endif; ?>
+					
+					 <div data-role="collapsible" class="filter-options-item">
+                        <div data-role="title" class="filter-options-title"><?php /* @escapeNotVerified */ echo __($filter->getName()) ?></div>
+                        <div data-role="content" class="filter-options-content"><?php /* @escapeNotVerified */ echo $block->getChildBlock('renderer')->render($filter); ?></div>
+                    </div>
+					
+			    
+                <?php endif; ?>
+
+            <?php endforeach; ?>
+			<div data-role="collapsible" class="filter-options-item" attribute="<?php echo $filter->getRequestVar() ?>" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": false, "multipleCollapsible": false}}'>
+            <?php $url=strtok($_SERVER["REQUEST_URI"],'?'); ?>
+			<div data-role="title" class="filter-options-title">Price</div>
+			<div data-role="content" class="filter-options-content">   
+             <div class="blog_busters"><a href="<?php echo $url ?>?product_list_order=price">Price : Low to High</a></div>
+             <div class="blog_busters"><a href="<?php echo $url ?>?product_list_order=price&product_list_dir=desc">Price : High to Low</a></div>
+             </div>
+         </div>    
+            <?php if ($wrapOptions): ?>
+                </div>
+            <?php else: ?>
+                <script>
+
+                    require([
+                        'jquery'
+                    ], function ($) {
+                        $('#layered-filter-block').addClass('filter-no-options');
+                        
+                    });
+                </script>
+
+            <?php endif; ?>
+        </div>
+    </div>
+<?php }else{ ?>
+<?php $url=strtok($_SERVER["REQUEST_URI"],'?'); ?>
+<div class="block filter" id="layered-filter-block" data-collapsible="true">
+                <div class="block-title filter-title" data-count="0" role="tablist">
+            <strong data-role="title" role="tab" aria-selected="false" aria-expanded="false" tabindex="0">Filter</strong>
+        </div>
+        <div class="block-content filter-content">
+          <!--<strong role="heading" aria-level="2" class="block-subtitle filter-subtitle Sizetheme">Shopping Options</strong>-->
+                        <div class="filter-options" id="narrow-by-list" data-role="content" role="tablist">
+                            
+                <script>
+
+                    require([
+                        'jquery'
+                    ], function ($) {
+                        $('.filter-options-title').click(function(){
+                            $('.filter-options-content').toggle();
+                        });
+                        
+                    });
+                </script>
+                            
+                        <div data-role="collapsible" class="filter-options-item" attribute="available_region" role="presentation" data-collapsible="true">
+                        <div data-role="title" class="filter-options-title" role="tab" aria-selected="false" aria-expanded="false" tabindex="0">Price</div>
+            <div data-role="content" class="filter-options-content" role="tabpanel" aria-hidden="true" >   
+             <div class="blog_busters"><a href="<?php echo $url ?>?product_list_order=price">Price : Low to High</a></div>
+             <div class="blog_busters"><a href="<?php echo $url ?>?product_list_order=price&product_list_dir=desc">Price : High to Low</a></div>
+             </div>
+         </div>    
+                            </div>
+                    </div>
+    </div>
+
+<?php    } ?>
+
+

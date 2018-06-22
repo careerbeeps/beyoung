@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <container name="root">
+            <block  template="product/x3_js.phtml"
+                class="Magebay\Pdc\Block\X3"
+                name="magebay_pdc_block_x3" />
+            <block class="Magento\Framework\View\Element\Template" name="pdc.view.getiframe"
+                   template="Magebay_Pdc::product/iframe.phtml" cacheable="false"/>
+        </container>
+    </body>
+</page>

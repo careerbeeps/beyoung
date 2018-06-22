@@ -1,0 +1,34 @@
+<?php
+$colors = $this->getColors();
+$includeColors = $this->getProductIncludeColors();
+ ?> 
+<div class="pdc-show-content">
+	<button id="start-drawing" style="float : left;" type="button"><?php echo __('Start Drawing'); ?></button>
+	<button id="stop-drawing" type="button"><?php echo __('Stop Drawing'); ?></button>
+	<div id="drawing-attribute-content" style="display : none;">
+		<select id="drawing-mode-selector">
+		  <option value="Pencil"><?php echo __('Pencil'); ?></option>
+		  <option value="Circle"><?php echo __('Circle'); ?></option>
+		  <option value="Spray"><?php echo __('Spray'); ?></option>
+		  <option value="Pattern"><?php echo __('Pattern'); ?></option>
+		  <option value="hline"><?php echo __('Hline'); ?></option>
+		  <option value="vline"><?php echo __('Vline'); ?></option>
+		  <option value="square"><?php echo __('Square'); ?></option>
+		  <option value="diamond"><?php echo __('Diamond'); ?></option>
+		  <option value="texture"><?php echo __('Texture'); ?></option>
+		</select>
+		<span class="info">30</span><input value="30" min="0" max="150" id="drawing-line-width" type="range"><br>
+		<input type="hidden" id="drawing-color-value" value="#000000" />
+		<ul class="pdc-color-list">
+			<?php $i = 0; foreach($colors as $color)  :?>
+				<?php 
+					if(is_array($includeColors)) {
+						if(!in_array($color->getColorId(), $includeColors)) continue;  
+					} 
+					?>
+					<li class="pdc-color-list-frawing"><a style="background-color:<?php echo $color->getColor_code(); ?>; color:#<?php echo $color->getColor_code(); ?>" title="White" pdc-data-color="#<?php echo $color->getColor_code(); ?>"><!--span class="pdc-brightness-1"></span--></a></li>
+			<?php $i++; endforeach;  ?>
+		</ul>
+	</div>
+	
+</div>

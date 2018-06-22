@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Magebay_Pdc::pdc/bootstrap/css/bootstrap.min.css" />
+		<css src="Magebay_Pdc::pdc/bootstrap/css/colorpicker.min.css" />
+	</head>
+    <body>
+        <container name="root">
+            <block class="Magebay\Pdc\Block\Intstagram" name="pdc.instagram_redirect" template="Magebay_Pdc::x3/design/left-area/instagram_redirect.phtml"/>
+        </container>
+    </body>
+</page>

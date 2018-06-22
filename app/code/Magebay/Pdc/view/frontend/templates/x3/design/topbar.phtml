@@ -1,0 +1,76 @@
+<?php 
+$_productData = $this->getProductInfo();
+$_productName = $_productData['name'];
+$_isAdmin = $this->isAdminUser();
+$productConfigs = $this->getProductConfig();
+?>
+<div class="pdc-topbar">
+    <div class="topbar-content">
+        <h3 class="item-title hidden-xs"><a class="show-full-screen hidden-xs" data-toggle="tooltip" data-placement="bottom" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> <span class="hidden-xs"><?php echo __($_productName) ?></span></h3>
+        <ul class="topbar-buttons">            
+			<?php if($_isAdmin) : ?>
+            <li>
+                <a class="tool-btn" pdc-data="VIEW_TEMPLATE_LIBRARY" href="javascript:void(0)" title="<?php echo __("Template Library") ?>">
+                    <i class="fa fa-trello"></i>
+                    <span><?php echo __("View Template Library") ?></span>
+                </a>
+            </li>
+            <?php endif; ?>
+            <li>
+                <?php if(!$_isAdmin) : ?>
+                <a class="tool-btn continue-shopping" pdc-data="SAVE_CUSTOMER_DESIGN" title="<?php echo __("CONTINUE SHOPPING") ?>"><i class="fa fa-shopping-cart"></i> <span><?php echo __("SAVE & CONTINUE") ?></span>
+				</a>	
+                <?php else : ?>
+                <a class="tool-btn" pdc-data="pdc-btn" pdc-action="SAVE_SAMPLE_DESIGN" href="javascript:void(0)" title="<?php echo __("Save Design Template") ?>"><i class="fa fa-floppy-o"></i><span><?php echo __("Save Design Template") ?></span></a>
+                <?php endif; ?>
+            </li>
+			
+            <?php if($_isAdmin) : ?>
+            <!--
+            <li>
+                <a class="tool-btn" pdc-data="pdc-btn" pdc-action="REMOVE_SAMPLE_DESIGN" href="javascript:void(0)" title="<?php echo __("Remove Default Design") ?>"><i class="glyphicon glyphicon-floppy-remove"></i><span><?php echo __("Remove Default Design") ?></span>                   </a>
+            </li>-->
+            <?php endif; ?>
+            <?php if(!isset($productConfigs['enable_download_btn']) || isset($productConfigs['enable_download_btn']) && $productConfigs['enable_download_btn'] == 1): ?>
+            <li>
+                
+				<a  class="tool-btn download-btn" title="<?php echo __("Download Your Design") ?>"id="dLabel" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<i class="fa fa-download"></i> <span class="hidden-sm hidden-xs"><?php echo __("Download") ?></span>
+					<span class="caret"></span>
+				</a>
+
+				<ul class="dropdown-menu" aria-labelledby="dLabel">
+					<li pdc-data="DOWNLOAD-PNG"><a href="#"><?php echo __("Download PNG") ?></a></li>
+					<li pdc-data="DOWNLOAD-PDF"><a href="#"><?php echo __("Download PDF") ?></a></li>
+				</ul>
+            </li>
+            <?php endif; ?>
+			<li>
+				 <a class="tool-btn" id="pdc-x3-undo" title="<?php echo __("Undo") ?>"><i class="fa fa-reply" aria-hidden="true"></i> <span><?php echo __("Undo") ?></span>
+				</a>	
+			</li>
+			<li>
+				 <a class="tool-btn" id="pdc-x3-redo" title="<?php echo __("Redo") ?>"><i class="fa fa-share" aria-hidden="true"></i <span><?php echo __("Redo") ?></span>
+				</a>	
+			</li>
+            <?php if(!isset($productConfigs['enable_reset_btn']) || isset($productConfigs['enable_reset_btn']) && $productConfigs['enable_reset_btn'] == 1): ?>
+            <li>
+                <a class="tool-btn reset-btn fancybox" href="#pdc-reset-cont" title="<?php echo __("Reset Your Design") ?>" type="button"><i class="fa fa-history"></i><span> <span class="hidden-sm hidden-xs"><?php echo __("Reset") ?></span></span></a>									
+            </li>
+            <?php endif; ?>
+            <?php if(!isset($productConfigs['enable_share_btn']) || isset($productConfigs['enable_share_btn']) && $productConfigs['enable_share_btn'] == 1): ?>
+            <?php if($this->pdcHelper->getStoreConfigData('pdp/customer_action/sharing') == 1): ?>
+            <li>
+                <a class="tool-btn share-btn" pdc-data="SHARE_DESIGN" title="<?php echo __("Share Your Design") ?>" type="button"><i class="fa fa-share-alt"></i><span> <span class="hidden-sm hidden-xs"><?php echo __("Share") ?></span></span></a>									
+            </li>
+            <?php endif; ?>
+            <?php endif; ?>
+            <?php if(!$_isAdmin) : ?>
+            
+            <li class="pdc-close-btn">
+                <a class="tool-btn close-btn fancybox" href="#pdc-close-cont" title="<?php echo __("Close Your Design") ?>" type="button"><i class="fa fa-times"></i><span> <span class="hidden-sm hidden-xs"><?php echo __("Close") ?></span></span></a>
+            </li>
+            <?php endif; ?>
+        </ul>
+    </div>
+</div>

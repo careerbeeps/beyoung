@@ -1,0 +1,84 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<script>
+require([
+            'jquery'
+        ], function(jQuery){
+            (function(jQuery) {
+				jQuery(".page-header.em-header-01").addClass("sticky-head");
+              var lastScrollTop = 0;
+              jQuery(window).scroll(function(event){
+               var st =jQuery(this).scrollTop();
+               if (st > lastScrollTop && st>160){
+                 jQuery(".page-header.em-header-01").removeClass("sticky-head");
+               } else {
+                  // upscroll code
+                  jQuery(".page-header.em-header-01").addClass("sticky-head");
+               }
+               lastScrollTop = st;
+            });
+
+              /*jQuery('#sizechart-image-code').click(function(){
+                 jQuery("#sizechart-image").show();
+                  return false;
+              });
+
+               jQuery('.mclose').click(function(){
+                 jQuery("#sizechart-image").hide();
+                 return false;
+              });*/
+
+            })(jQuery);
+        });
+
+</script>
+
+
+<div class="fb-customerchat" page_id="1926524024344292"> </div>
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '1795968774032189',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v3.0'
+      });
+    };
+
+    (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+<div class="copyright">
+    <address class="f-left">
+		<span><?php /* @escapeNotVerified */ echo $block->getCopyright() ?></span>
+		<span>Designed By <a href="#" title="Beyoung">Beyoung family</a>
+		</span>
+	</address>
+</div>
+
+<style>
+.customPopup {
+ display: none;
+}
+.mclose {
+   background: #606061;
+   color: #FFFFFF;
+   width: 34px;
+   float: right;
+   border-radius: 100%;
+   text-align: center;
+   margin: 0;
+   font-size: 24px;
+}
+.mclose:hover { background: #f8eb27 ; }
+</style>

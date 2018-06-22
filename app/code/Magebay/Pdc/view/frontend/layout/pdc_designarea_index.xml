@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Magebay_Pdc::pdc/bootstrap/css/bootstrap.min.css" />
+		<css src="Magebay_Pdc::pdc/bootstrap/css/colorpicker.min.css" />
+	</head>
+    <body>
+        <container name="root">
+            <block class="Magento\Framework\View\Element\Template" name="pdc.designarea.index"
+                   template="Magebay_Pdc::designarea/index.phtml" cacheable="false"/>
+            <block  template="designarea/angular_js.phtml"
+                class="Magebay\Pdc\Block\Angularjs"
+                name="magebay_pdc_block_angularjs" />
+        </container>
+    </body>
+</page>

@@ -1,0 +1,29 @@
+<?php
+$fonts = $this->pdcHelper->getFonts();
+$fontArr = array();
+?>
+<style type="text/css">
+    <?php foreach ( $fonts as $font) : ?>
+	<?php
+	//if new data updated
+	if(trim($font->getOriginalFilename() != ''))
+	{
+		$fileName = $font->getOriginalFilename();
+	}
+	else
+	{
+		$fileName = $font->getName() . '.' . $font->getExt();
+	}
+	?>
+    <?php $fontArr[$font->getName()] = $fileName; ?>
+    @font-face {
+        font-family: '<?php echo $font->getName() ?>';
+        src: url('<?php echo $this->pdcHelper->getMediaUrl(); ?>pdp/fonts/<?php echo $fileName; ?>');
+    }
+    <?php endforeach; ?>
+</style> 
+<input type="hidden" value="<?php echo htmlentities(json_encode($fontArr)) ?>" id="pdc_font_list"/>
+<!--Make sure fonts are loaded-->
+<?php foreach ( $fonts as $font) : ?>
+    <span style="font-family: <?php echo $font->getName() ?>; visibility: hidden; position: absolute;"><?php echo __("Sample Font") ?> </span>
+<?php endforeach; ?>

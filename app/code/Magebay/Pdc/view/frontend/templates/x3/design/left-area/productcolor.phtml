@@ -1,0 +1,64 @@
+<?php 
+$productId = $this->getCurrentProductId();
+$productDesignColor = $this->pdcHelper->getProductDesignColors($productId);
+$colorImageModel = $this->pdpColorImageFactory->create();
+$mediaUrl = $this->pdcHelper->getMediaUrl() . "pdp/images/";
+$defaultColor = (isset($productConfigs['default_color'])) ? $productConfigs['default_color'] : "default";
+$productConfigsInfo = $this->getProductConfig();
+$productConfigs = array();
+if(isset($productConfigsInfo['note'])) {
+    $productConfigs = $productConfigsInfo['note'];
+}
+$isDefaultSideHasColorCode = false;
+$defaultColorCode = "";
+$defaultColorName = "";
+foreach ($productDesignColor['default_side'] as $side) {
+   if(isset($side['color_code']) && $side['color_code'] != "") {
+       $isDefaultSideHasColorCode = true;
+       $defaultColorCode = str_replace('#', '',$side['color_code']);
+       $defaultColorName = $side['color_name'];
+       break;
+   }
+}
+?>
+<div class="pdc-show-content">
+    <ul class="product-colors">
+        <?php if($isDefaultSideHasColorCode) : ?>
+        <?php 
+        $_defaultBgImage = array();
+        foreach ($productDesignColor['default_side'] as $side) {
+            $_defaultBgImage[$side['id']] = array(
+                'filename' => $side['filename'],
+                'overlay' => $side['overlay']
+            );
+        }
+        $_defaultImages = htmlentities(json_encode($_defaultBgImage));
+        ?>
+        <li pdc-background-images="<?php echo $_defaultImages ?>" rel="default" <?php echo ($defaultColor == "default") ? 'class="active"' : ''; ?> >
+            <a style="background: #<?php echo $defaultColorCode ?>;color: #<?php echo $defaultColorCode ?>;" title="<?php echo $defaultColorName ?>"></a>
+        </li>
+        <?php endif; ?>
+        <?php foreach($productDesignColor['product_color_sides'] as $_productColor) :?>
+        <?php 
+        $productColorImages = $colorImageModel->getProductColorImage($productId, $_productColor['id']); 
+        $imageArr = array();
+        foreach ($productColorImages as $image) {
+            $filenameThumbnail = '';
+            if(isset($image['filename_thumbnail'])) {
+                $filenameThumbnail = $image['filename_thumbnail'];
+            }
+            $imageArr[$image->getSideId()] = array(
+                'filename' => $image->getFilename(),
+                'overlay' => ($image->getOverlay() && $image->getOverlay() != '') ? $image->getOverlay() : '',
+                'filename_thumbnail' => $filenameThumbnail
+            );
+        }
+        $_colorImages = htmlentities(json_encode($imageArr));
+        $_colorCode = str_replace('#', '', $_productColor['color_code']);
+        ?>
+        <li pdc-background-images="<?php echo $_colorImages ?>" rel="<?php echo $_productColor['id'] ?>" <?php echo ($defaultColor == $_productColor['id']) ? 'class="active"' : ''; ?> >
+            <a style="background: #<?php echo $_colorCode ?>;color: #<?php echo $_colorCode ?>;" title="<?php echo $_productColor['color_name'] ?>"></a>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

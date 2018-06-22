@@ -1,0 +1,55 @@
+<?php
+$asset_repository = $this->assetRepository;
+$isMinJs = $block->getFieldSetting('dev/js/minify_files');
+$isMinCss = $block->getFieldSetting('dev/css/minify_files');
+$isMinJs = $isMinJs != '' ? $isMinJs : 0;
+$isMinCss = $isMinCss != '' ? $isMinCss : 0;
+// temp fix 
+$isMinJs = 0;
+$isMinCss = 0;
+if($isMinJs)
+{
+	$angularjs = array(
+		'angular/lib/angular.min.js',
+		'angular/lib/angular-route.min.js',
+		//'angular/lib/angular-animate.js',
+		'angular/lib/bootstrap-colorpicker-module.min.js',
+		'angular/x3/app.min.js',
+		'angular/x3/routes.min.js',
+		'angular/x3/services.min.js',
+		'angular/x3/controllers.min.js',
+		'angular/x3/directives.min.js',
+		'pdc/fabricjs/fabric.min.js'
+	);
+}
+else
+{
+	$angularjs = array(
+		'angular/lib/angular.js',
+		'angular/lib/angular-route.min.js',
+		//'angular/lib/angular-animate.js',
+		'angular/lib/bootstrap-colorpicker-module.min.js',
+		'angular/x3/app.js',
+		'angular/x3/routes.js',
+		'angular/x3/services.js',
+		'angular/x3/controllers.js',
+		'angular/x3/directives.js',
+		'pdc/fabricjs/fabric.js'
+	);
+}
+
+?>
+<?php foreach($angularjs as $jsFile) : ?>
+    <?php $asset  = $asset_repository->createAsset('Magebay_Pdc::' . $jsFile); ?>
+    <script src="<?php echo $asset->getUrl() ?>"></script>
+<?php endforeach; ?>
+<input type="hidden" id="mst_base_url" value="<?php echo $this->pdcHelper->getBaseUrl() ?>" />
+<?php if($isMinJs) : ?>
+<input type="hidden" id="mst_base_url_templage" value="<?php echo $block->getViewFileUrl('Magebay_Pdc::angular/x3/app.min.js'); ?>" />
+<?php else : ?>
+<input type="hidden" id="mst_base_url_templage" value="<?php echo $block->getViewFileUrl('Magebay_Pdc::angular/x3/app.js'); ?>" />
+<?php endif; ?>
+
+<input type="hidden" id="is_min_js" value="<?php echo $isMinJs; ?>" />
+<input type="hidden" id="mst_media_url" value="<?php echo $this->pdcHelper->getMediaUrl() ?>" />
+<input type="hidden" id="current_product_id" value="<?php echo $this->getRequest()->getParam('productid') ?>" />

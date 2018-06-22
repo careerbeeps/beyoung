@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Magebay_Pdc::pdc/fancybox/jquery.fancybox.css" />
+	</head>
+    <body>
+        <container name="root">
+            <block class="Magebay\Pdc\Block\X3" name="pdc.view.finaldesign"
+                   template="Magebay_Pdc::view/finaldesign.phtml" cacheable="false"/>
+        </container>
+    </body>
+</page>

@@ -1,0 +1,73 @@
+<input type="hidden" id="mst_base_url" value="<?php echo $block->getBaseUrl() ?>"/>
+<script>
+    requirejs([
+        'jquery',
+        'fancybox'
+    ], function(jQuery){
+        jQuery(function($){
+            PDCOrderView = {
+                openIframe: function(url, title, closeCallback) {
+                    $.fancybox({
+                        fitToView	: true,
+                        width		: '100%',
+                        height		: '100%',
+                        closeClick	: true,
+                        autoCenter: true,
+                        href: url,
+                        type: 'iframe',
+                        title: title || null,
+                        beforeClose: function() {
+                            //alert("Before Close");
+                        },
+                        afterClose: function() {
+                            //alert("After close");
+                            closeCallback && closeCallback();
+                        }
+                    });
+                },
+                closeHandle: function() {
+                      
+                },
+                reOrderAdditionalInfo : function() {
+                    var itemId, customizeLink;
+                    $(".view-customize-design").hide();
+                    if($(".edit-order-table td.col-product").length) {
+                        $(".edit-order-table td.col-product").each(function() {
+                            //console.info($(this));
+                            itemId = $(this).find('.product-title').closest("div").attr("id").split('_')[2];
+                            customizeLink = $("#customize-" + itemId).html();
+                            $(this).append(customizeLink);
+                        });
+                    } else {
+                        //Bundle product might be
+                        // if($(".view-customize-design")) {
+                        //     $(".view-customize-design").each(function() {
+                        //         var itemId = $(this).attr("id").replace("customize-", "");
+                        //         var row = $("#order_item_"+ itemId +"_title").closest("td");
+                        //         var customizeLink = $("#customize-" + itemId).html();
+                        //         row.append(customizeLink);
+                        //     });
+                        //}
+                    }
+                }(),
+                viewDesignItemInOrder : function() {
+                    var baseUrl = $("#mst_base_url").val(),
+                    itemId, 
+                    orderId,
+                    productId,
+                    url;
+                    $("#sales_order_view").on("click", '.pdp-order-item', function(e) {
+                        //e.preventDefault();
+                        //e.stopPropagation();
+                        productId = $(this).attr('productid');
+                        itemId = $(this).attr('itemid');
+                        orderId = $(this).attr('orderid');
+                        url = baseUrl + "pdc/view/finaldesign/product-id/"+ productId + "/order-id/" + orderId + "/item-id/" + itemId;
+                        console.info(url);
+                        PDCOrderView.openIframe(url, "View Design", function() {});
+                    });
+                }()
+            }
+        });
+    });
+</script>

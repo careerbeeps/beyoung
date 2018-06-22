@@ -1,0 +1,22 @@
+<?php 
+$item = $block->getItem();
+$buyRequest = $item->getBuyRequest()->getData();
+$images = array();
+if(isset($buyRequest['extra_options']) && $buyRequest['extra_options'] != "") {
+    $jsonFilename = $buyRequest['extra_options'];
+    $images = $this->pdcHelper->getThumbnailImage($jsonFilename);
+    if(empty($images)) {
+         return;
+    }
+}
+?>
+<?php if(!empty($images)) : ?>
+<?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/load_fonts.phtml')->toHtml(); ?>
+<dt><span style="font-weight: bold"><?php //echo __('Customize Design') ?></span></dt>
+<dl class="item-options pdp_cart_item">
+<?php foreach ($images as $image) : ?>
+	<dt><?php echo __($image['name']) ?></dt>
+	<dd style="font-style: normal;"><div class="pdc-preview-item" style="border: 1px solid #ccc;line-height: 0;width: 180px;"><?php echo $image['image'] ?></div></dd>
+<?php endforeach; ?>
+</dl>
+<?php endif; ?>

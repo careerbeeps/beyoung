@@ -1,0 +1,69 @@
+<div class="container">
+    <!--<pre>{{sideData | json}}</pre>-->
+    <div class="row">
+        <div class="col-lg-24">
+            <h3 style="margin: 7px 0px;"> <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Product Designer - Add New Side </h3>
+        </div>
+        <div class="col-lg-24">
+            <div class="pull-right">
+                <!--<a class="btn btn-primary" ng-click="backOrCancel()"> <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> <span>Back</span> </a> -->
+                <a class="btn btn-success btn-sm" ng-click="saveSideData()"> <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> <span>Save</span> </a> 
+                <pbp-loading ng-if="isSaving"></pbp-loading>
+                <a class="btn btn-warning btn-sm" ng-click="backOrCancel()"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <span>Cancel</span> </a> 
+            </div>
+        </div>
+    </div>
+    <div class="row main-content">
+        <div class="col-lg-24">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Add New Layer Form</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="add_new_side_form" name="add_new_side_form" class="form-horizontal">
+                        <div class="form-group" ng-class="{'has-error': !sideData.label}">
+                            <label for="layer_title" class="col-sm-2">Side Title <span class="required">*</span></label> 
+                            <div class="col-sm-20"> <input type="text" placeholder="Front Side" required ng-model="sideData.label" class="form-control" id="layer_label" name="label"/> </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': !sideData.canvaswidth}">
+                            <label for="layer_title" class="col-sm-2">Canvas Width <span class="required">*</span></label> 
+                            <div class="col-sm-20"> <input type="text" placeholder="400" required ng-model="sideData.canvaswidth" class="form-control" id="layer_canvaswidth" name="canvaswidth"/> </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error': !sideData.canvasheight}">
+                            <label for="layer_title" class="col-sm-2">Canvas Height<span class="required">*</span></label> 
+                            <div class="col-sm-20"> <input type="text" placeholder="400" required ng-model="sideData.canvasheight" class="form-control" id="layer_canvaswidth" name="canvasheight"/> </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="layer_price" class="col-sm-2">Price</label> 
+                            <div class="col-sm-20"> <input type="text" ng-model="sideData.price" class="form-control" id="layer_price" name="price"/> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2">Background Image</label> 
+                            <div class="col-sm-20">
+                                <pdc-media img-src="{{sideData.filename}}" name="filename"></pdc-media>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2">Mask Image</label> 
+                            <div class="col-sm-20">
+                                <pdc-media img-src="{{sideData.overlay}}" name="overlay"></pdc-media>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2">Position</label> 
+                            <div class="col-sm-20"> <input type="text" ng-model="sideData.position" class="form-control" id="side_position" name="position"/> </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-primary" style="display: none;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Preview Design</h3>
+                </div>
+                <div class="panel-body">
+                    <canvas id="canvas" width="400" height="400" style="border: 1px dotted #ccc;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

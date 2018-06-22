@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+		<pdp>
+			<setting>
+				<enable>1</enable>
+				<design_button_label>Customize it!</design_button_label>
+				<adminemail>admin@domain.com</adminemail>
+				<jquery>1</jquery>
+                <image_quality>0.7</image_quality> 
+	        </setting>
+			<design>
+				<is_notify>1</is_notify>
+				<hide_thumbnail>1</hide_thumbnail>
+				<is_quick_tool>1</is_quick_tool>
+				<is_frame_alignment>1</is_frame_alignment>
+				<is_swap>1</is_swap>
+				<is_duplicate>1</is_duplicate>
+				<is_flip>1</is_flip>
+				<is_opacity>1</is_opacity>
+				<is_filling>1</is_filling>
+				<is_delete>1</is_delete>
+				<is_quote_lib>1</is_quote_lib>
+				<curved>0</curved>
+                <default_object_color>#000</default_object_color>
+                <default_object_fontsize>25</default_object_fontsize>
+                <default_object_fontheight>1</default_object_fontheight>
+                <skip_save_design>1</skip_save_design>
+			</design>
+			<customer_action>
+				<sharing>0</sharing>
+				<addthis_id>ra-4f94cf46554eb949</addthis_id>
+			</customer_action>
+            <custom_upload>
+                <size_unit>M</size_unit>
+                <default_message>DROP FILES HERE OR CLICK TO UPLOAD</default_message>
+                <upload_max_size_message>This file too big</upload_max_size_message>
+                <upload_max_files_message>Max files exceeded. Please remove all and upload again!</upload_max_files_message>
+                <remove_label>Remove</remove_label>
+                <cancel_label>Cancel</cancel_label>
+                <upload_max_size>0</upload_max_size>
+                <upload_max_files>10</upload_max_files>
+                <upload_min_size>0</upload_min_size>
+                <upload_max_width>0</upload_max_width>
+                <upload_max_height>0</upload_max_height>
+                <upload_min_dpi_message>There is low resolution image. It might affect to print quality!</upload_min_dpi_message>
+            </custom_upload>
+            <watermark>
+                <position>bottom_right</position>
+            </watermark>
+	    </pdp>
+    </default>
+</config>

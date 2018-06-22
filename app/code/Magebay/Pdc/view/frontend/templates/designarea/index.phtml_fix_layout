@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $block->getViewFileUrl('Magebay_Pdc::pdc/bootstrap/css/bootstrap.min.css');?>">
+<div class="pdc-wrapper" ng-app="pdcApp">
+<?php echo $this->getLayout()->createBlock('Magebay\Pdc\Block\X3')->setTemplate('Magebay_Pdc::x3/design/load_fonts.phtml')->toHtml(); ?>
+    <div class="row">
+        <div class="col-md-12">
+            <div ng-view></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var mainUrl = '<?php echo $this->getUrl(); ?>';
+if(window.self !== window.top)
+{
+	mainUrl = window.parent.document.getElementById('pdc-main-url').value;
+}
+
+console.log(mainUrl);
+if(window.top.location.href !== mainUrl) {
+	window.top.location.href = mainUrl;
+} 
+</script>

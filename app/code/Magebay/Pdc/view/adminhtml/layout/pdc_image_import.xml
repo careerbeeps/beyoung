@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * =====================================================
+ *                 -:- Z-Programing -:-
+ * =====================================================
+ * @PROJECT    : Product Design Canvas [ Magebay.com ]
+ * @AUTHOR     : Zuko
+ * @FILE       : pdc_image_import.xml
+ * @CREATED    : 1:45 PM , 19/Apr/2016
+ * @DETAIL     : 
+ * =====================================================
+ * =====================================================
+ **/
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+<!--            <block class="Magento\ImportExport\Block\Adminhtml\Import\Edit\Before"
+                   template="Magebay_Pdc::image/import/temporary_script.phtml" name="pdc.image.import.form.before"
+                   as="import_form_before"/>-->
+            <block class="Magebay\Pdc\Block\Adminhtml\Image\ImportBlock" name="pdc.image.import.form.container"/>
+<!--            <block class="Magento\ImportExport\Block\Adminhtml\Form\After"
+                   template="Magento_ImportExport::import/form/after.phtml" name="pdc.image.import.form.after"
+                   as="import_form_after"/>-->
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,78 @@
+<?php 
+$version = $this->getBkMagentoVersion();
+if(version_compare($version, '2.1.0') >= 0)
+{
+	
+}
+else
+{
+	return false;
+}
+if(!$this->isShowTab())
+{
+    if(!$block->checkPDCKey())
+    {
+        echo __('Please active extension before adding pdc data to product!');
+    }
+	return false;
+}
+$id = $this->getRequest()->getParam('id');
+if((int)$id <= 0)
+{
+	echo __('Please Create Product befor Enter PDC Information');
+}
+else 
+{
+	if(!$block->_pdcHelper->isModuleEnable()) {
+    echo "<h3>Product customization tool module is disabled. Please enable PDC to use it's features!</h3>";
+    return;
+}
+$currentProduct = $block->getCurrentProduct();
+$productId = $currentProduct->getId();
+$pdcManager = $block->_pdcHelper->getBaseUrl() . "pdc/designarea/index/productid/" . $productId;
+?>
+<button type="button" id="pdc_manager"><?php echo __("Open PDC Manager") ?></button>
+<input type="hidden" id="pdc-main-url" value="<?php echo $block->full_url(); ?>" />
+<script>
+    requirejs([
+        'jquery',
+        'fancybox'
+    ], function(jQuery){
+        jQuery(function($){
+            PDCBackend = {
+                clickPdpTab : function() {
+                    $("#product_info_tabs_product-pdc, #pdc_manager").click(function() {
+                        PDCBackend.openIframe("<?php echo $pdcManager  ?>", 'PDC Manager', PDCBackend.closeHandle);
+                    });
+                }(),
+                openIframe: function(url, title, closeCallback) {
+                    $.fancybox({
+                        fitToView	: true,
+                        width		: '100%',
+                        height		: '100%',
+                        closeClick	: true,
+                        autoCenter: true,
+                        href: url,
+                        type: 'iframe',
+                        title: title || null,
+						minHeight  : '90%',
+                        beforeClose: function() {
+                            //alert("Before Close");
+                        },
+                        afterClose: function() {
+                            //alert("After close");
+                            closeCallback && closeCallback();
+                        }
+                    });
+                },
+                closeHandle: function() {
+                    //Active product general tab
+                    $("#product_info_tabs_product-details", top.document).click();   
+                }
+            }
+        });
+    });
+</script>
+<?php 
+}
+?>

@@ -1,0 +1,152 @@
+<?php
+$isPdcInProductconfig = $block->checkPdcProductConfig() ? 1 : 0;
+if (!$this->isDesignAble() && $isPdcInProductconfig == 0) {
+    return false;
+}
+$productId = $this->getProductId();
+$baseUrl = $this->pdcHelper->getBaseUrl();
+$pdpDesignInfo = $this->getPdpDesignInfo(); 
+//If redesign request, pass the redesign id to iframe
+$redesign = "";
+$params = $this->getParams();
+if(isset($params["redesign"]) && $params["redesign"]) {
+    $redesign = "redesign/" . $params["redesign"] . "/";
+} 
+//For share request
+$shareParam = "";
+if(isset($params["share"]) && $params["share"]) {
+    $shareParam = "share/" . $params["share"] . "/";
+}
+$iframeUrl = $baseUrl . "pdc/view/getiframe/product-id/" . $productId . "/json/" . $pdpDesignInfo['extra_options'] . "/" . $redesign . $shareParam;
+?>
+<style type="text/css">
+#pdc_iframe {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0; 
+	border: 0px solid transparent;
+	margin: auto; 
+	position: absolute; 
+	top: -100000px;
+	z-index: 100000;
+}
+</style>
+<span style="display : none">
+<button type="button" id="pdc-reload-price-option">Reload Price </button>
+<input type="text" name="pdc_extract_price" id="pdc-extract-price" value="" />
+<input type="text" name="pdc_wanpper_product_id" id="pdc-wanpper-product-id" value="<?php echo $productId; ?>" />
+<input type="text" name="product_custom_price" id="product-custom-price" value="" />
+<input type="text" name="is_pdc_popup_loader" id="is-pdc-popup-loader" value="0" />
+<input type="hidden" id="load-product-config-url" value="<?php echo $this->getUrl()?>pdc/index/CheckPoductConfig/" />
+
+</span>
+    <div class="loading-mask" id="pdc-design-loading-please" style="display : none">
+        <div class="loader">
+            <img style="position: absolute;" alt="<?php echo __('Please wait....'); ?>" src="<?php echo $block->getViewFileUrl('images/loader-1.gif'); ?>">
+        </div>
+    </div>
+<iframe id="pdc_iframe" src="<?php echo $iframeUrl ?>"></iframe>
+<script type="text/javascript">		
+	var pdcIframe = document.getElementById("pdc_iframe");
+	document.getElementById("design_product_<?php echo $this->getProductId() ?>").addEventListener("click", function(){
+		pdcIframe.contentDocument.getElementById('get_design_content').click();
+	});
+</script>
+<?php if($isPdcInProductconfig == 1) : ?>
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert'
+    ],function ($,alert) {
+        pdcProducConfig = {
+            loadUrl : $('#load-product-config-url').val(),
+            product_id : $('#pdc-wanpper-product-id').val(),
+            getPdcProductConfig : function()
+            {
+                var self = this;
+                var mLoadUrl = this.loadUrl;
+                $.ajax({
+                    url : mLoadUrl,
+                    dataType : 'json',
+                    type: 'POST',
+                    data : $('#product_addtocart_form').serialize(),
+                    beforeSend : function () {
+                        $('#pdc-design-loading-please').css('display','block');
+                        $('#design_product_'+self.product_id).prop('disabled',true);
+                    },
+                    error : function () {
+                        $('#pdc-design-loading-please').css('display','none');
+                        alert({
+                            title: 'Error',
+                            content: 'Load Design faild!, Please check again!',
+                            actions: {
+                                always: function(){}
+                            }
+                        });
+                    },
+                    success : function (res) {
+                        if(typeof  res == 'object')
+                        {
+
+                        }
+                        else
+                        {
+                            res = JSON.parse(res);
+                        }
+
+                        if(res.status == 'success')
+                        {
+                            console.log(res.product_id);
+                            $('#current_product_id').val(res.product_id);
+                            $('input[name="extra_options"]').val(res.json_file);
+                            $('#is-pdc-popup-loader').val(0)
+                            if($('#pdc-product-config-json-'+res.product_id).length)
+                            {
+                                var newJsonFile = $('#pdc-product-config-json-'+res.product_id).val();
+                                $('input[name="extra_options"]').val(newJsonFile);
+                                $('#design_product_'+self.product_id).prop('disabled',false);
+                                $('#design_product_'+self.product_id).click();
+                                $('#pdc-design-loading-please').css('display','none');
+                            }
+                        }
+                        else {
+                            $('#pdc-design-loading-please').css('display','none');
+                            alert({
+                                title: 'Note',
+                                content: 'Please Select All option to load design',
+                                actions: {
+                                    always: function(){}
+                                }
+                            });
+                        }
+                    }
+                })
+            },
+            init : function () {
+                var self = this;
+                if($('.super-attribute-select').length)
+                {
+                    //self.getPdcProductConfig();
+                    $('.super-attribute-select').change(function () {
+                        var okOption = true;
+                        $('.super-attribute-select').each(function () {
+                            if($.trim($(this).val()) == '')
+                            {
+                                okOption = false;
+                                return false;
+                            }
+                        })
+                        if(okOption)
+                        {
+                            self.getPdcProductConfig();
+                        }
+
+                    })
+                }
+                if($("#pdp_design_action").length && $("#pdp_design_action").val() != "") {
+                    $('#design_product_'+self.product_id).prop('disabled',false);
+                }
+            }
+        }
+        pdcProducConfig.init();
+    })
+</script>
+<?php endif; ?>

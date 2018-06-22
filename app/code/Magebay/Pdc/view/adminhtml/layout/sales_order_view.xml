@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="Magebay_Pdc::pdc/fancybox/jquery.fancybox.css" />
+	</head>
+    <body>
+        <referenceBlock name="order_item_extra_info">
+            <block class="Magebay\Pdc\Block\Adminhtml\Order\View\Additional" name="pdc_order_item_data" template="Magebay_Pdc::order/view/additional.phtml"/>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magento\Backend\Block\Template" name="pdc_order_view_js" template="Magebay_Pdc::order/view/js.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

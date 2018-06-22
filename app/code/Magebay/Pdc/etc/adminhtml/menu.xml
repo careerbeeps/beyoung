@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magebay_Pdc::pdc_manage" title="Product Designer" module="Magebay_Pdc" sortOrder="40" resource="Magebay_Pdc::pdc_manage"/>
+        <add id="Magebay_Pdc::manage_image" title="Images Library" module="Magebay_Pdc" sortOrder="10" parent="Magebay_Pdc::pdc_manage" resource="Magebay_Pdc::manage_image"/>
+        <add id="Magebay_Pdc::manage_image_categories" title="Manage Categories" module="Magebay_Pdc" sortOrder="30" parent="Magebay_Pdc::manage_image" action="pdc/imagecategory/index" resource="Magebay_Pdc::manage_image_categories"/>
+        <add id="Magebay_Pdc::manage_image_images" title="Manage Images" module="Magebay_Pdc" sortOrder="40" parent="Magebay_Pdc::manage_image" action="pdc/image/index" resource="Magebay_Pdc::manage_image_images"/>
+        <add id="Magebay_Pdc::manage_font_color" title="Fonts and Colors" module="Magebay_Pdc" sortOrder="20" parent="Magebay_Pdc::pdc_manage" resource="Magebay_Pdc::manage_font_color"/>
+        <add id="Magebay_Pdc::manage_font" title="Fonts Library" module="Magebay_Pdc" sortOrder="30" parent="Magebay_Pdc::manage_font_color" action="pdc/font/" resource="Magebay_Pdc::manage_font"/>
+        <add id="Magebay_Pdc::manage_colors" title="Colors Library" module="Magebay_Pdc" sortOrder="50" parent="Magebay_Pdc::manage_font_color" action="pdc/color/" resource="Magebay_Pdc::manage_colors"/>
+        <add id="Magebay_Pdc::manage_system_pdc" title="PDC Configuration" module="Magebay_Pdc" sortOrder="50" parent="Magebay_Pdc::pdc_manage" action="adminhtml/system_config/edit/section/pdp" resource="Magebay_Pdc::manage_system_pdc"/>
+    </menu>
+</config>

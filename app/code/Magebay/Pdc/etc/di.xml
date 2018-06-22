@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="pdc_imagecategory_listing_data_source" xsi:type="string">Magebay\Pdc\Model\ResourceModel\Imagecategory\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magebay\Pdc\Model\ResourceModel\Imagecategory\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mst_pdp_artwork_category</argument>
+            <argument name="eventPrefix" xsi:type="string">pdc_imagecategory_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">imagecategory_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Magebay\Pdc\Model\ResourceModel\Imagecategory</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="magebay_pdc_quote_item_to_order_plugin"
+                type="Magebay\Pdc\Plugin\ToOrderItemPlugin"
+                sortOrder="10"
+                disabled="false"/>
+    </type>
+	<!-- Delete Item wishlisht -->
+	<preference for="Magento\Wishlist\Controller\Index\Add" type="Magebay\Pdc\Controller\Rewrite\Wishlist\Index\Add" />
+	 <type name="Magento\Checkout\CustomerData\AbstractItem">
+        <plugin name="Magebay_Pdc::Minicart_Image_Changer" type="Magebay\Pdc\Plugin\Minicart\Image" sortOrder="1"/>
+    </type>
+</config>

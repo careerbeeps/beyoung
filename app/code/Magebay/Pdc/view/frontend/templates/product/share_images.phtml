@@ -1,0 +1,21 @@
+<?php 
+$shareId = $this->getRequest()->getParam("share");
+if (!$shareId) {
+	return;
+}
+$shareInfo = $this->getShareInfo($shareId);
+$thumbnail = $shareInfo['note'];
+$productUrl = '';
+$product = $this->getCurrentProduct();
+if($product)
+{
+	$productUrl = $product->getProductUrl();
+	$productUrl .= '?share='.$shareId;
+}
+?>
+<link og:image="<?php echo $thumbnail ?>" rel="image_src" href="<?php echo $thumbnail ?>"/>
+<!--For facebook share. First time share should show the thumbnail-->
+<meta property="og:image" content="<?php echo $thumbnail ?>"/>
+<meta property="og:image:width" content="400" />
+<meta property="og:url" content="<?php echo $productUrl; ?>" />
+<!--End Facebook share setting-->

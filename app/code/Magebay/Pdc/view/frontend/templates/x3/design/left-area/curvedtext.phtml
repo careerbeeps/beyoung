@@ -1,0 +1,71 @@
+<?php $jsUrl = $this->getPdcJsUrl(); ?>
+<div class="text-effects text-left">
+	<ul class="dropdown-effects" aria-labelledby="a-effect">
+		<li class="init">
+			<span><?php echo __("Normal") ?></span>
+			<img height="50px" src="<?php echo $jsUrl ?>/curvedtext/images/normal.png"/>
+		</li>
+		<!--<li pdc-effect="arc"><?php echo __("Arc") ?></li>-->
+		<li pdc-effect="normal">
+			<span><?php echo __("Normal") ?></span>
+			<img height="50px" src="<?php echo $jsUrl ?>/curvedtext/images/normal.png"/>
+		</li>
+		<li id="text-vertical">
+			<span><?php echo __("Vertical") ?></span>
+			<img height="50px" src="<?php echo $jsUrl ?>/curvedtext/images/vertical.png"/>
+		</li>
+		<li pdc-effect="curved">
+			<span><?php echo __("Curved") ?></span>
+			<img height="50px" src="<?php echo $jsUrl ?>/curvedtext/images/curved.png"/>
+		</li>
+		<li pdc-effect="bulge">
+			<span><?php echo __("Bulge") ?></span>
+			<img height="50px" src="<?php echo $jsUrl ?>/curvedtext/images/bulge.png"/>
+		</li>
+		<li pdc-effect="obulge">
+			<span><?php echo __("Obulge") ?></span>
+			<img height="50px" src="<?php echo $jsUrl ?>/curvedtext/images/obulge.png"/>
+		</li>
+		<li pdc-effect="smallToLarge">
+			<span><?php echo __("Small To Large") ?></span>
+			<img height="50px" src="<?php echo $jsUrl ?>/curvedtext/images/smallToLarge.png"/>
+		</li>
+		<li pdc-effect="largeToSmallTop">
+			<span><?php echo __("Large To Small Top") ?></span>
+			<img height="50px" src="<?php echo $jsUrl ?>/curvedtext/images/largeToSmallTop.png"/>
+		</li>
+		<li pdc-effect="spiral">
+			<span><?php echo __("Spiral") ?></span>
+			<img height="50px" src="<?php echo $jsUrl ?>/curvedtext/images/spiral.png"/>
+		</li>
+		<!--<li pdc-effect="largeToSmallBottom"><?php echo __("largeToSmallBottom") ?></li>-->
+	</ul>
+
+    <div pdc-box="curved"  class="no-display" id="pdc_text_curved_control">
+        <h4><?php echo __("Transform Text Effect") ?></h4>
+        <div><?php echo __('Reverse :') ?><input type="checkbox" name="reverse" id="pdc_ctext_reverse" /></div>
+        <div class="pdc-text-effect-control">
+            <span class="label"><?php echo __('Radius :') ?></span>
+            <input type="range"  name="radius" min="0" max="360" value="100" id="pdc_ctext_radius" />
+            <input type="number"  name="radius_number" min="0" max="360" value="100" id="pdc_ctext_radius_number" class="input-number" />
+        </div>
+        <div class="pdc-text-effect-control">
+            <span class="label"><?php echo __('Spacing :') ?></span>
+            <input type="range" name="spacing"  min="1" max="50" value="15" id="pdc_ctext_spacing" />
+            <input type="number" name="spacing_number"  min="1" max="50" value="15" id="pdc_ctext_spacing_number" maxlength="3" size="3" class="input-number" />
+        </div>
+    </div>
+    <div pdc-box="small-large-font"  class="no-display" id="pdc_font_curved_control" class="pdc-text-effect-control">
+        <h4><?php echo __("Transform Text Effect") ?></h4>
+        <div class="pdc-text-effect-control">
+            <span class="label"><?php echo __('Small Font :') ?></span>
+            <input type="range"  name="text_small_font" min="5" max="144" value="20" id="text_small_font" />
+            <input type="number"  name="text_small_font_number" min="5" max="144" value="20" id="text_small_font_number" class="input-number" />
+        </div>
+        <div class="pdc-text-effect-control">
+            <span class="label"><?php echo __('Large Font:') ?></span>
+            <input type="range"  name="text_large_font" min="5" max="144" value="50" id="text_large_font" />
+            <input type="number"  name="text_large_font_number" min="5" max="144" value="50" id="text_large_font_number" class="input-number" />
+        </div>
+    </div>
+</div>

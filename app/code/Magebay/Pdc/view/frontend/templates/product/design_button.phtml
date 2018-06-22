@@ -1,0 +1,81 @@
+<?php
+$isPdcInProductconfig = $block->checkPdcProductConfig() ? 1 : 0;
+if (!$this->isDesignAble() && $isPdcInProductconfig == 0) {
+    return false;
+}
+$productId = $this->getProductId();
+$pdpDesignInfo = $this->getPdpDesignInfo();
+$pdcProductConfigs = array();
+if($isPdcInProductconfig == 1)
+{
+    $pdcProductConfigs = $block->getAllPdcInproductConfigs();
+    $supperAttribute = isset($pdpDesignInfo['supper_attribute']) ? $pdpDesignInfo['supper_attribute'] : array();
+    if(count($supperAttribute))
+    {
+        $productId = $block->getChildproduct($supperAttribute);
+
+    }
+}
+
+$currentDesignImages = $this->getCurrentDesignResultImage($pdpDesignInfo['extra_options_value']);
+$area = "";
+$params = $this->getParams();
+if (isset($params['area']) && $params['area'] != "") {
+	$area = $params['area'];
+	if ($area == "customize") {
+		$area = "backend";
+	}
+}
+$productConfig = $this->getProductConfig($productId);
+$baseUrl = $this->pdcHelper->getBaseUrl();
+?>
+<div style="display: none">
+    <input type="hidden" name="extra_options" value="<?php echo $pdpDesignInfo['extra_options'] ?>"/>
+	<input type="hidden" id="extra_options_value" value="<?php echo htmlentities($pdpDesignInfo['extra_options_value']) ?>"/>
+	<input type="hidden" id="url_site" value="<?php echo $baseUrl ?>" />
+    <input type="hidden" id="base_url" value="<?php echo $baseUrl ?>" />
+	<input type="hidden" id="current_product_id" value="<?php echo $productId; ?>" />
+    <input type="hidden" id="image_quality" value="<?php echo $this->pdcHelper->getImageQuality(); ?>" />
+	<input type="hidden" id="pdp_design_action" value="<?php echo $pdpDesignInfo['action'] ?>" />
+	<input type="hidden" id="product_url" value="<?php echo $this->getProductUrl(); ?>" />
+	<input type="hidden" id="pdp_design_share" value="<?php echo $pdpDesignInfo['share_id'] ?>" />
+	<input type="hidden" id="pdp_btn_action" value=""/>
+    <input type="hidden" id="final_price" value=""/>
+	<input type="hidden" id="cart_item_id" value="<?php echo $pdpDesignInfo['cart_item_id'] ?>" />
+	<input type="hidden" id="wishlist_item_id" value="<?php echo $pdpDesignInfo['wishlist_item_id'] ?>" />
+	<input type="hidden" id="template_id" value="<?php echo $pdpDesignInfo['template_id'] ?>" />
+	<input type="hidden" id="sample_images" value="<?php echo ($currentDesignImages) ? htmlentities(json_encode($currentDesignImages)) : ""; ?>"/>
+	<input type="hidden" id="currency_symbol" value="<?php echo $this->getCurrentCurrencySymbol(); ?>"/>
+	<input type="hidden" id="pdc_product_config" value="<?php echo htmlentities(json_encode($productConfig)) ?>" />
+	<input type="hidden" id="temp-pdc-thumbnail" name="temp_pdc_thumbnail" value="" />
+    <input type="text" id="is-product-config" name="is_product_config" value="<?php echo $isPdcInProductconfig; ?>" />
+    <?php if(count($pdcProductConfigs)) : ?>
+        <?php foreach ($pdcProductConfigs as $pdcKey => $pdcProductJson) : ?>
+            <input type="hidden" name="pdc_product_config_json_<?php echo $pdcKey  ?>" id="pdc-product-config-json-<?php echo $pdcKey ?>" value="<?php echo $pdcProductJson; ?>" />
+        <?php endforeach; ?>
+    <?php endif; ?>
+	<!-- Reload Price -->
+	<?php if ($area != "backend") : ?>
+    <?php //echo $this->getLayout()->createBlock("core/template")->setTemplate("pdp/action/load_fonts.phtml")->toHtml() ?>
+	<?php //$productViewObj = $this->getCurrentProduct(); ?>
+	<input type="hidden" id="product_price_config" value="<?php // Not done yet///echo htmlentities($productViewObj->getJsonConfig()); ?>" />
+	<?php endif; ?>
+</div>
+<style>
+    .design-btn .design-product{
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+        padding: 14px 17px;
+        background: #1bad84 none repeat scroll 0 0;
+        border: 1px solid #1bad84;
+        box-sizing: border-box;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 600;
+        width: 49%;
+    }
+</style>
+<div class="design-btn">
+    <button class="button create-sample-btn design-product primary" <?php if($isPdcInProductconfig == 1) { echo 'disabled="disabled"'; } ?>type="button" id="design_product_<?php echo $this->getProductId(); ?>"><span><span><?php echo __($this->getButtonLabel()); ?></span></span></button>
+</div>

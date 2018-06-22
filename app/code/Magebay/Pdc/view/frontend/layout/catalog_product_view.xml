@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceBlock name="head.additional">
+			<block class="Magebay\Pdc\Block\Designbutton" name="pdpdesign_share_images" as="pdpdesign_share_images" template="product/share_images.phtml" before="-" />
+		</referenceBlock>
+        <referenceBlock name="product.info.addtocart.additional">
+            <block class="Magebay\Pdc\Block\Designbutton" name="pdpdesign_button_simple" as="design_button_for_simple_product" template="product/design_button.phtml" />
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart">
+            <block class="Magebay\Pdc\Block\Designbutton" name="pdpdesign_button_config" as="design_button_other_product_type" template="product/design_button.phtml" />
+        </referenceBlock>
+        <referenceBlock name="root">
+            <block class="Magebay\Pdc\Block\Designbutton" name="pdp_iframe" as="pdp_iframe" template="product/iframe_wrapper.phtml" />
+        </referenceBlock>
+    </body>
+</page>

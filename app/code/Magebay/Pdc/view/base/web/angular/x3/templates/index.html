@@ -1,0 +1,393 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-24">
+            <h3 style="margin: 7px 0px;"> <span class="glyphicon glyphicon-fire" aria-hidden="true"></span> {{productInfo.traslate.pdc_popup_label}} </h3>
+        </div>
+    </div>
+    <div class="row main-content">
+        <div class="col-lg-24">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{productInfo.traslate.pdc_popup_gene_info}}</h3>
+                </div>
+                <div class="panel-body">
+                    <p style="text-align: center;"><pdc-loadingbar ng-if="(!sides || isSaving) && productInfo.status != 1"></pdc-loadingbar></p>
+                    <form ng-if="productInfo" id="enable_product_design" name="add_new_side_form" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="enable_pdp_design" class="col-sm-2">{{productInfo.traslate.pdc_popup_enable_pdp}}<span class="required">*</span></label> 
+                            <div class="col-sm-20">
+                                <select ng-change="updateProductInfo()" ng-model="productInfo.status" name="enable_pdp_design" id="enable_pdp_design">
+                                    <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                    <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-primary" ng-if="productInfo.status == 1">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> 
+                        <span>{{productInfo.traslate.pdc_popup_design_side}}</span>
+                        <a class="btn btn-success btn-sm" ng-click="addNewSide()"> 
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                            <span>{{productInfo.traslate.pdc_popup_new_side}}</span> 
+                        </a>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p style="text-align: center;"><pdc-loadingbar ng-if="!sides || isSaving"></pdc-loadingbar></p>
+                    <div class="row" ng-if="sides">
+                        <div class="col-md-16">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>{{productInfo.traslate.pdc_popup_side_label}}</th>
+                                    <th>{{productInfo.traslate.pdc_popup_cavans_side}}</th>
+                                    <th>{{productInfo.traslate.pdc_popup_position}}</th>
+                                    <th>{{productInfo.traslate.pdc_popup_action}}</th>
+                                </tr>
+                                <tr ng-repeat="side in sides">
+                                    <td>{{side.label}}</td>
+                                    <td>{{ side.canvaswidth + " x " + side.canvasheight + " px"}}</td>
+                                    <td>{{side.position}}</td>
+                                    <td>
+                                        <a href="#side/{{side.id}}/product/{{product_id}}" class="btn btn-info btn-sm">{{productInfo.traslate.pdc_popup_edit}}</a>
+                                        <a ng-click="deleteSide(side.id, product_id)" class="btn btn-warning btn-sm">{{productInfo.traslate.pdc_popup_delete}}</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-4">
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-info btn-block" href="#templatelist/product/{{product_id}}">  
+                                <span>{{productInfo.traslate.pdc_popup_temp_lib}}</span> 
+                            </a>
+                            <a class="btn btn-success btn-block" href="#productcolors/product/{{product_id}}">  
+                                <span>{{productInfo.traslate.pdc_popup_add_product_color}}</span> 
+                            </a>
+                            <a class="btn btn-success btn-block" href="#productcolorslist/product/{{product_id}}">  
+                                <span>{{productInfo.traslate.pdc_popup_view_product_color}}</span> 
+                            </a>
+                        </div>
+                    </div>
+                    <!--<pre>{{sides | json}}</pre>-->
+                </div>
+            </div>
+            <div class="panel panel-primary" ng-if="productInfo.status == 1" style="display: none;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{productInfo.traslate.pdc_popup_limit_img_color}}</h3>
+                </div>
+                <div class="panel-body" style="display: none;">
+                    
+                </div>
+            </div>
+            <div class="panel panel-primary" ng-if="productInfo.status == 1">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                       
+                        <a class="btn btn-success btn-sm" ng-click="configPdcData(1)"> 
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                            <span>Advanced Options</span> 
+                        </a>
+                        <a class="btn btn-success btn-sm" ng-click="configPdcData(2)"> 
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                            <span>Select Product Image Categories</span> 
+                        </a>
+                        <a class="btn btn-success btn-sm" ng-click="configPdcData(3)"> 
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                            <span>Select Product Colors</span> 
+                        </a>
+                        <a class="btn btn-success btn-sm" ng-click="configPdcData(4)"> 
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 
+                            <span>Select Product Fonts</span> 
+                        </a>
+                    </h3>
+                </div>
+                <div class="panel-body" ng-if="advancedTabOptoins">
+                    <p style="text-align: center;"><pdc-loadingbar ng-if="!productInfo || isSaving"></pdc-loadingbar></p>
+                    <!--<pre>{{productInfo | json}}</pre>-->
+                    <div class="row product-config" ng-if="productInfo">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th colspan="2" style="text-align: center;">{{productInfo.traslate.pdc_popup_disable_tab}}</th>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_product_design}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_product_design_tab">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+								<tr>
+                                    <td>{{productInfo.traslate.pdc_popup_auto_replace}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.auto_replace_pattern">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_enabel_element}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_elements_tab">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_upload_tab}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_upload_tab">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_text_tab}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_text_tab">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_layer_tab}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_layer_tab">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_infor_tab}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_info_tab">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_download_button}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_download_btn">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_share_button}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_share_btn">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_reset_button}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_reset_btn">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_zoon_button}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_zoom_btn">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th colspan="2" style="text-align: center;">{{productInfo.traslate.pdc_popup_en_dis_plugin}}</th>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_backgroud_plugin}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_background_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_image_plugin}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_image_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_upload_plugin}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_upload_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_clipart_plugin}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_clipart_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_shape_plugin}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_shape_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_upload_facebook}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_facebook_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_upload_instagram}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_instagram_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_mask_plugin}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_frame_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_qr_plugin}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_qrcode_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>{{productInfo.traslate.pdc_popup_picker_plugin}}</td>
+                                    <td>
+                                        <select ng-change="updateProductInfo()" ng-model="productInfo.note.enable_colorpicker_plugin">
+                                            <option value="2">{{productInfo.traslate.pdc_popup_no}}</option>
+                                            <option value="1">{{productInfo.traslate.pdc_popup_yes}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+								<tr>
+                                    <td>Text price</td>
+                                    <td>
+										<input type="text" ng-change="updateProductInfo()" ng-model="productInfo.note.text_price" value="0" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+				<div class="panel-body" ng-if="pdcDataImage">
+                    <p style="text-align: center;"><pdc-loadingbar ng-if="!productInfo || isSaving"></pdc-loadingbar></p>
+                    <!--<pre>{{productInfo | json}}</pre>-->
+                    <div class="row product-config" ng-if="imagecats">
+                        <div class="col-md-12">
+							<button ng-click="updatePdcData(2)">Save Select Item</button>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th style="text-align: center;"><input type="checkbox" ng-click="catSelectAll($event)" ng-model="catSelected" />Check All</th>
+									<th style="text-align: center;">Title</th>
+									<th style="text-align: center;">Image Types</th>
+                                </tr>
+                                 <tr ng-repeat="imagecat in imagecats">
+									<td><input type="checkbox" ng-model="catImages[imagecat.id]" value="{{imagecat.id}}" /></td>
+									<td>{{imagecat.title}}</td>
+									<td>{{imagecat.image_types}}</td>
+								 </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+				<div class="panel-body" ng-if="pdcDataColor">
+                    <p style="text-align: center;"><pdc-loadingbar ng-if="!productInfo || isSaving"></pdc-loadingbar></p>
+                    <!--<pre>{{productInfo | json}}</pre>-->
+                    <div class="row product-config" ng-if="coloritems">
+                        <div class="col-md-12">
+                           <button ng-click="updatePdcData(3)">Save Select Item</button>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th style="text-align: center;"><input type="checkbox" ng-click="colorSelectAll($event)" ng-model="colorSelected" />Check All</th>
+									<th style="text-align: center;">Colors Name</th>
+									<th style="text-align: center;">Colors Code </th>
+									<th style="text-align: center;">Possition</th>
+                                </tr>
+                                 <tr ng-repeat="coloritem in coloritems">
+									<td><input type="checkbox" ng-model="colorItemModel[coloritem.color_id]" value="{{coloritem.color_id}}" /></td>
+									<td style="color : #{{coloritem.color_code}}"><a style="background-color: #{{coloritem.color_code}}; color: #{{coloritem.color_code}}; display: block;" title="Turquoise blue">1</a></td>
+									<td>{{coloritem.color_code}}</td>
+									<td>{{coloritem.position}}</td>
+								 </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+				<div class="panel-body" ng-if="pdcDataFont">
+                    <p style="text-align: center;"><pdc-loadingbar ng-if="!productInfo || isSaving"></pdc-loadingbar></p>
+                    <!--<pre>{{productInfo | json}}</pre>-->
+                    <div class="row product-config" ng-if="fontitems">
+                        <div class="col-md-12">
+                           <button ng-click="updatePdcData(4)">Save Select Item</button>
+                            <table class="table table-striped">
+                                <tr>
+                                    <th style="text-align: center;"><input type="checkbox" ng-click="fontSelectAll($event)" ng-model="fontSelected" />Check All</th>
+									<th style="text-align: center;">Display Text</th>
+									<th style="text-align: center;">Position</th>
+                                </tr>
+                                 <tr ng-repeat="fontitem in fontitems">
+									<td><input type="checkbox" ng-model="fontItemsModel[fontitem.font_id]" value="{{fontitem.font_id}}" /></td>
+									<td>{{fontitem.title}}</td>
+									<td style="font-family : {{fontitem.name}}">{{fontitem.display_text}}</td>
+									<td>{{fontitem.font_position}}</td>
+								 </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+        </div>
+    </div>
+</div>

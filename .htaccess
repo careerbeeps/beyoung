@@ -410,6 +410,10 @@ ErrorDocument 403 /pub/errors/404.php
 
 </IfModule>
 
+<filesMatch “.(css|jpg|jpeg|png|gif|js|ico)$”>
+Header set Cache-Control “max-age=604800, public”
+</filesMatch>
+
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresByType text/css A31536000

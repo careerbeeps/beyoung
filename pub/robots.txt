@@ -3,5 +3,57 @@ Disallow:
 
 Disallow: /staging.beyoung.in/
 Disallow: /www.beyoung.in/stage/
+Disallow: /contentarea
+Disallow: /store.menu
+Disallow: /store.links
+Disallow: /top
+
+
+# Files
+Disallow: /cron.php
+Disallow: /cron.sh
+Disallow: /error_log
+Disallow: /install.php
+Disallow: /LICENSE.html
+Disallow: /LICENSE.txt
+Disallow: /LICENSE_AFL.txt
+Disallow: /STATUS.txt
+
+# Paths (no clean URLs)
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: /*.php$
+Disallow: /*?SID=
+Disallow: /?___from_store=
+Disallow: *___from_store=
+Disallow: /?mode=
+Disallow: /?limit=
+Disallow: /?dir=
+Disallow: /.css$
+Disallow: /?p=*&
+Disallow: /?SID=
+Disallow: /admin*
+Disallow: *?brands=
+Disallow: *?q=
+Disallow: *%3*
+Disallow: *?ingredients=
+Disallow: *?mode=
+Disallow: *?p=
+
+Disallow: /*&limit
+Disallow: /*&sort
+Disallow: /*?route=checkout/
+Disallow: /*?route=account/
+Disallow: /*?route=affiliate/
+Disallow: /*?route=product/search
+Disallow: /*?page
+Disallow: /*?pages
+Disallow: /*?route
+Disallow: /*?sort
+Disallow: /*?filter
+Disallow: /*?option_value
+Disallow: /login
+Disallow: /login*
+Disallow: /sales/guest/form/
 
 Sitemap: https://www.beyoung.in/sitemap.xml

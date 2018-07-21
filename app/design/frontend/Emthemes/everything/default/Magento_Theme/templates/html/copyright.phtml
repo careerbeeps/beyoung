@@ -5,6 +5,16 @@
  */
 ?>
 <script>
+        require([ 'jquery'
+		], function($){
+            
+            $("#ladka_footer").click(function(){
+                $("#ladka_footer_div").toggle();
+            });
+
+        });
+ </script>
+<script>
 require([
             'jquery'
         ], function(jQuery){
@@ -22,15 +32,7 @@ require([
                lastScrollTop = st;
             });
 
-              /*jQuery('#sizechart-image-code').click(function(){
-                 jQuery("#sizechart-image").show();
-                  return false;
-              });
-
-               jQuery('.mclose').click(function(){
-                 jQuery("#sizechart-image").hide();
-                 return false;
-              });*/
+             
 
             })(jQuery);
         });
@@ -65,20 +67,3 @@ require([
 		</span>
 	</address>
 </div>
-
-<style>
-.customPopup {
- display: none;
-}
-.mclose {
-   background: #606061;
-   color: #FFFFFF;
-   width: 34px;
-   float: right;
-   border-radius: 100%;
-   text-align: center;
-   margin: 0;
-   font-size: 24px;
-}
-.mclose:hover { background: #f8eb27 ; }
-</style>

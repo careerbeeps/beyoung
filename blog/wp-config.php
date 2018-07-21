@@ -36,7 +36,7 @@ define('DB_NAME', 'beyoung_blog');
 define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'RT2x5w7!');
+define('DB_PASSWORD', '');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');

@@ -5,7 +5,7 @@
  * @category  Webkul
  * @package   Webkul_ZipCodeValidator
  * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license   https://store.webkul.com/license.html
  */
 namespace Webkul\ZipCodeValidator\Model\Config\Source;
@@ -17,9 +17,9 @@ class RegionOptions extends AbstractSource
     /**
      * Region Collection
      *
-     * @var \Magento\Customer\Model\Session
+     * @var \Webkul\ZipCodeValidator\Model\ResourceModel\Region\CollectionFactory
      */
-    private $regionCollection;
+    protected $_regionCollection;
 
     /**
      * Construct
@@ -29,7 +29,7 @@ class RegionOptions extends AbstractSource
     public function __construct(
         \Webkul\ZipCodeValidator\Model\ResourceModel\Region\CollectionFactory $regionCollectionFactory
     ) {
-        $this->regionCollection = $regionCollectionFactory;
+        $this->_regionCollection = $regionCollectionFactory;
     }
     /**
      * Get all options
@@ -38,7 +38,7 @@ class RegionOptions extends AbstractSource
      */
     public function getAllOptions()
     {
-        $collections = $this->regionCollection->create()
+        $collections = $this->_regionCollection->create()
             ->addFieldToFilter('status', 1);
         if ($this->_options === null) {
             foreach ($collections as $region) {

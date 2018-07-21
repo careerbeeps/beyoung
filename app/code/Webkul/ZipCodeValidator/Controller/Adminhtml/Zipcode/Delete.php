@@ -19,12 +19,12 @@ class Delete extends \Magento\Backend\App\Action
     /**
      * @var Filter
      */
-    private $filter;
+    protected $_filter;
 
     /**
      * @var CollectionFactory
      */
-    private $collectionFactory;
+    protected $_collectionFactory;
 
     /**
      * @param Context           $context
@@ -36,8 +36,8 @@ class Delete extends \Magento\Backend\App\Action
         Filter $filter,
         CollectionFactory $collectionFactory
     ) {
-        $this->filter = $filter;
-        $this->collectionFactory = $collectionFactory;
+        $this->_filter = $filter;
+        $this->_collectionFactory = $collectionFactory;
         parent::__construct($context);
     }
 
@@ -54,33 +54,12 @@ class Delete extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        try {
-            $collection = $this->filter
-                ->getCollection($this->collectionFactory->create());
-            if ($collection->getSize()) {
-                foreach ($collection as $region) {
-                    if (!isset($regionId)) {
-                        $regionId=$region->getRegionId();
-                    }
-                    $this->remove($region);
-                }
-                    $this->messageManager->addSuccess(__('Zipcode(s) deleted successfully'));
-            } else {
-                $this->messageManager->addError(__('No entity selected.'));
-            }
-        } catch (\Exception $e) {
-            $this->messageManager->addError($e->getMessage());
+        $collection = $this->_filter->getCollection($this->_collectionFactory->create());
+        foreach ($collection as $region) {
+            $region->delete();
         }
-
+        $this->messageManager->addSuccess(__('Zipcode deleted successfully'));
         $resultRedirect = $this->resultRedirectFactory->create();
-        if (isset($regionId)) {
-             return $resultRedirect->setPath('*/zipcode/', ['region_id' => $regionId]);
-        } else {
-            return $resultRedirect->setPath('*/region/');
-        }
-    }
-    private function remove($region)
-    {
-        return $region->delete();
+        return $resultRedirect->setPath('*/region/');
     }
 }

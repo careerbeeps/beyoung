@@ -51,13 +51,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         $fieldset->addField(
             'region_name',
             'text',
-            [
-                'name' => 'region_name',
-                'label' => __('Region Name / Zipcode'),
-                'title' => __('Region Name / Zipcode'),
-                'required' => true,
-                'note'=>__('For single zipcode, you can add zipcode directly from here')
-            ]
+            ['name' => 'region_name', 'label' => __('Region Name'), 'title' => __('Region Name'), 'required' => true, 'class' => 'validate-no-html-tags']
         );
         $fieldset->addField(
             'status',
@@ -73,12 +67,7 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         $fieldset->addField(
             'zipcodes-csv',
             'file',
-            [
-                'name' => 'zipcodes-csv',
-                'label' => __('CSV'),
-                'title' => __('CSV'),
-                'note'=>__('Allowed File Type \'CSV\' Only')
-            ]
+            ['name' => 'zipcodes-csv', 'label' => __('CSV'), 'title' => __('CSV')]
         );
         $form->setValues($model->getData());
         $form->setUseContainer(true);

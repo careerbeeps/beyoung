@@ -5,7 +5,7 @@
  * @category Webkul
  * @package Webkul_ZipCodeValidator
  * @author Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license https://store.webkul.com/license.html
  */ 
 -->
@@ -139,10 +139,10 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">delete</item>
                         <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="zipcodevalidator/region/MassDelete"/>
+                        <item name="url" xsi:type="url" path="zipcodevalidator/region/massDelete"/>
                         <item name="confirm" xsi:type="array">
-                        <item name="title" xsi:type="string" translate="true">Delete</item>
-                        <item name="message" xsi:type="string" translate="true">Do you want to delete selected entries?</item>
+                            <item name="title" xsi:type="string" translate="true">Delete</item>
+                            <item name="message" xsi:type="string" translate="true">Do you want to delete selected entries?</item>
                         </item>
                     </item>
                 </argument>

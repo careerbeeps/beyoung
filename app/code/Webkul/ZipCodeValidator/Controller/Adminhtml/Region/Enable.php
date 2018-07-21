@@ -19,12 +19,12 @@ class Enable extends \Magento\Backend\App\Action
     /**
      * @var Filter
      */
-    private $filter;
+    protected $_filter;
 
     /**
      * @var CollectionFactory
      */
-    private $collectionFactory;
+    protected $_collectionFactory;
 
     /**
      * @param Context           $context
@@ -36,8 +36,8 @@ class Enable extends \Magento\Backend\App\Action
         Filter $filter,
         CollectionFactory $collectionFactory
     ) {
-        $this->filter = $filter;
-        $this->collectionFactory = $collectionFactory;
+        $this->_filter = $filter;
+        $this->_collectionFactory = $collectionFactory;
         parent::__construct($context);
     }
 
@@ -54,17 +54,13 @@ class Enable extends \Magento\Backend\App\Action
      */
     public function execute()
     {
-        $collection = $this->filter->getCollection($this->collectionFactory->create());
+        $collection = $this->_filter->getCollection($this->_collectionFactory->create());
         foreach ($collection as $region) {
             $region->setStatus(1);
-            $this->saveRegion($region);
+            $region->save();
         }
         $this->messageManager->addSuccess(__('Regions enabled successfully'));
         $resultRedirect = $this->resultRedirectFactory->create();
         return $resultRedirect->setPath('*/*/');
-    }
-    private function saveRegion($region)
-    {
-        return $region->save();
     }
 }

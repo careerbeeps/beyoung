@@ -1,0 +1,29 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 2.0.3 --------------------------------------
+
+    + Zip Code Validation feature updated for individual product
+    + Admin is able to mass delete regions
+    - Bugs Fixed
+
+-------------------------------- Version 2.0.2 --------------------------------------
+
+    + Admin can enable or disable the module from config.
+    + Admin can apply the ZipCodeValidator on all product or specific product.
+    + Admin upload the csv file of zipcode with zipcode range.
+    + Compatible with magento 2.2.x
+    
+-------------------------------- Version 2.0.1 --------------------------------------
+
+    + Allow admin to add/edit multiple regions.
+    + Admin can select multiple regions on product add/edit page.
+
+-------------------------------- Version 2.0.0 --------------------------------------
+	
+    + It show product is available for shipping at given location or not.
+    + Admin can add any rules.
+    + It will allow user to check shipping availability.
+    + If the shipping in the region will not available then it will show warning that shipping in this region does not exist.

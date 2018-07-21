@@ -19,12 +19,12 @@ class Collection extends ZipcodeCollection implements SearchInterface
     /**
      * @var AggregationInterface
      */
-    private $aggregations;
+    protected $_aggregations;
 
     /**
      * @var Magento\Framework\App\RequestInterface
      */
-    private $request;
+    protected $_request;
 
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entity
@@ -53,7 +53,7 @@ class Collection extends ZipcodeCollection implements SearchInterface
         $eventObject,
         $resourceModel,
         $model = 'Magento\Framework\View\Element\UiComponent\DataProvider\Document',
-        \Magento\Framework\DB\Adapter\AdapterInterface  $connection = null,
+        \Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct(
@@ -65,7 +65,7 @@ class Collection extends ZipcodeCollection implements SearchInterface
             $connection,
             $resource
         );
-        $this->request = $request;
+        $this->_request = $request;
         $this->_eventPrefix = $eventPrefix;
         $this->_eventObject = $eventObject;
         $this->_init($model, $resourceModel);
@@ -77,7 +77,7 @@ class Collection extends ZipcodeCollection implements SearchInterface
      */
     public function getAggregations()
     {
-        return $this->aggregations;
+        return $this->_aggregations;
     }
 
     /**
@@ -86,7 +86,7 @@ class Collection extends ZipcodeCollection implements SearchInterface
      */
     public function setAggregations($aggregations)
     {
-        $this->aggregations = $aggregations;
+        $this->_aggregations = $aggregations;
     }
     
     /**
@@ -156,5 +156,16 @@ class Collection extends ZipcodeCollection implements SearchInterface
     public function setItems(array $items = null)
     {
         return $this;
+    }
+    protected function _getAllIdsSelect($limit = null, $offset = null)
+    {
+        $idsSelect = clone $this->getSelect();
+        $idsSelect->reset(\Magento\Framework\DB\Select::ORDER);
+        $idsSelect->reset(\Magento\Framework\DB\Select::LIMIT_COUNT);
+        $idsSelect->reset(\Magento\Framework\DB\Select::LIMIT_OFFSET);
+        $idsSelect->reset(\Magento\Framework\DB\Select::COLUMNS);
+        $idsSelect->columns($this->getResource()->getIdFieldName(), 'main_table');
+        $idsSelect->limit($limit, $offset);
+        return $idsSelect;
     }
 }

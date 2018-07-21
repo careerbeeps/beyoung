@@ -17,7 +17,7 @@ class Zipcode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      *
      * @var null|\Magento\Store\Model\Store
      */
-    private $store = null;
+    protected $_store = null;
 
     /**
      * Construct
@@ -67,7 +67,7 @@ class Zipcode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     public function setStore($store)
     {
-        $this->store = $store;
+        $this->_store = $store;
         return $this;
     }
 
@@ -78,6 +78,6 @@ class Zipcode extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
     public function getStore()
     {
-        return $this->storeManager->getStore($this->store);
+        return $this->_storeManager->getStore($this->_store);
     }
 }

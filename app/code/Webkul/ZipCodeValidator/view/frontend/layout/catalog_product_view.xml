@@ -5,7 +5,7 @@
  * @category Webkul
  * @package Webkul_ZipCodeValidator
  * @author Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license https://store.webkul.com/license.html
  */ 
 -->
@@ -14,8 +14,8 @@
 		<css src="Webkul_ZipCodeValidator::css/styles.css"/>
 	</head>
 	<body>
-		<referenceContainer name="alert.urls">
-			<block class="Webkul\ZipCodeValidator\Block\Product\ViewOnProduct" name="zipcode_form" template="Webkul_ZipCodeValidator::product/viewonproduct.phtml" before="-" cacheable="false" />
+		<referenceContainer name="product.info.extrahint">
+			<block class="Webkul\ZipCodeValidator\Block\Product\ViewOnProduct" name="zipcode_form" template="Webkul_ZipCodeValidator::product/viewonproduct.phtml" before="-" />
 		</referenceContainer>
 	</body>
 </page>

@@ -4,10 +4,10 @@
  * @category  Webkul
  * @package   Webkul_ZipCodeValidator
  * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license   https://store.webkul.com/license.html
  */
-.wk-zcv-regionlist {
+ .wk-zcv-regionlist {
     padding-top: 15px;
 }
 .wk-zcv-regionlist-table {
@@ -38,6 +38,10 @@
     width: 25%;
     margin-top: 15px;
     height: 32px;
+}
+.wk-zcv-log #login{
+    color: #16C5F1;
+    cursor: pointer;
 }
 input[type="text"][id^=wk-zcv-zipcode] {
     width:80%;
@@ -91,9 +95,10 @@ div [class^=wk-zcv-zipform]{
     float:left;
     background-image: url(../images/new-icon.png) ;
     padding-left: 26px ;
+    padding-right: 50px ;
     background-repeat: no-repeat ;
-    border:none;
-    border-bottom: 2px solid #1979c3;
+    border:none !important;
+    border-bottom: 2px solid #1979c3 !important;
 }
 [id^=wk-zcv-check]{
     color: #1979c3;
@@ -202,4 +207,23 @@ div ul .wk-zcv-log{
 }
 div ul .wk-zcv-log:hover{
     background: #fff;
+}
+.wk-zcv-login-popup{
+    display: none;
+    position: absolute;
+    width: 30%;
+    background: ghostwhite;
+    padding: 3%;
+    border: 5px solid #3071a9;
+    border-radius: 20px;
+    z-index: 999;
+}
+.wk-zcv-login-popup > span.close-login-popup {
+    position: absolute;
+    right: 30px;
+    top: 15px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #f36060;
+    cursor: pointer;
 }

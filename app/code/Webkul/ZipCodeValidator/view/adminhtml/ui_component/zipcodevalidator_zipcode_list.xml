@@ -5,7 +5,7 @@
  * @category Webkul
  * @package Webkul_ZipCodeValidator
  * @author Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license https://store.webkul.com/license.html
  */ 
 -->
@@ -140,22 +140,31 @@
                 </item>
             </argument>
         </selectionsColumn>
-        <column name="id">
+        <column name="serial_no">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">textRange</item>
-                    <item name="sorting" xsi:type="string">desc</item>
-                    <item name="label" xsi:type="string" translate="true">Id</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <item name="label" xsi:type="string" translate="true">Serial No</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </column>
+        <column name="region_zipcode_from">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Zipcode From</item>
                     <item name="sortOrder" xsi:type="number">2</item>
                 </item>
             </argument>
         </column>
-        <column name="region_zipcode">
+        <column name="region_zipcode_to">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">zipcode</item>
-                    <item name="sortOrder" xsi:type="number">4</item>
+                    <item name="label" xsi:type="string" translate="true">Zipcode To</item>
+                    <item name="sortOrder" xsi:type="number">3</item>
                 </item>
             </argument>
         </column>

@@ -1708,23 +1708,13 @@ class TCPDF_FONTS {
 	 * @since 6.0.025
 	 * @public static
 	 */
-	 public static function _getfontpathFont()
-	 {
-		if (!defined('K_PATH_FONTS_AA') AND is_dir($fdir = realpath(dirname(__FILE__).'/../fonts'))) {
-			if (substr($fdir, -1) != '/') {
-				$fdir .= '/';
-			}
-			define('K_PATH_FONTS_AA', $fdir);
-		}
-		return defined('K_PATH_FONTS_AA') ? K_PATH_FONTS_AA : ''; 
-	 }
 	public static function getFontFullPath($file, $fontdir=false) {
 		$fontfile = '';
 		// search files on various directories
 		if (($fontdir !== false) AND @file_exists($fontdir.$file)) {
 			$fontfile = $fontdir.$file;
-		} elseif (@file_exists(self::_getfontpathFont().$file)) {
-			$fontfile = self::_getfontpathFont().$file;
+		} elseif (@file_exists(self::_getfontpath().$file)) {
+			$fontfile = self::_getfontpath().$file;
 		} elseif (@file_exists($file)) {
 			$fontfile = $file;
 		}

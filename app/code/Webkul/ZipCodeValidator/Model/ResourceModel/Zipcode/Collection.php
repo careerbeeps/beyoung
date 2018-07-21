@@ -17,14 +17,14 @@ class Collection extends AbstractCollection
     /**
      * @var string
      */
-    private $idFieldName = 'id';
+    protected $_idFieldName = 'id';
 
     /**
      * Store manager
      *
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    private $storeManager;
+    protected $_storeManager;
 
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface    $entityFactory
@@ -45,7 +45,7 @@ class Collection extends AbstractCollection
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
-        $this->storeManager = $storeManager;
+        $this->_storeManager = $storeManager;
     }
     
     /**

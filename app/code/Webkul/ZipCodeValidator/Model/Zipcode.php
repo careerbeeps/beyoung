@@ -5,7 +5,7 @@
  * @category  Webkul
  * @package   Webkul_ZipCodeValidator
  * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license   https://store.webkul.com/license.html
  */
 namespace Webkul\ZipCodeValidator\Model;
@@ -19,6 +19,10 @@ class Zipcode extends \Magento\Framework\Model\AbstractModel implements ZipcodeI
      */
     const NOROUTE_ENTITY_ID = 'no-route';
 
+    const DEFAULT_CONFIG = 2;
+    const PARTICULAR_PRODUCT = 0;
+    const NO_ZIPCODE = 1;
+
     /**
      * Test Record cache tag
      */
@@ -27,14 +31,14 @@ class Zipcode extends \Magento\Framework\Model\AbstractModel implements ZipcodeI
     /**
      * @var string
      */
-    private $cacheTag = 'zipcodevalidator_zipcode';
+    protected $_cacheTag = 'zipcodevalidator_zipcode';
 
     /**
      * Prefix of model events names
      *
      * @var string
      */
-    private $eventPrefix = 'zipcodevalidator_zipcode';
+    protected $_eventPrefix = 'zipcodevalidator_zipcode';
 
     /**
      * Initialize resource model

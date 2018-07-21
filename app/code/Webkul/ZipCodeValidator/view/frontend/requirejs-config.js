@@ -9,7 +9,9 @@
  var config = {
     map: {
         '*': {
-            viewonproduct: 'Webkul_ZipCodeValidator/js/viewonproduct'
+            viewonproduct: 'Webkul_ZipCodeValidator/js/viewonproduct',
+            'Magento_Checkout/js/view/shipping': 'Webkul_ZipCodeValidator/js/view/shipping',
+            'Magento_Checkout/js/view/cart/shipping-rates': 'Webkul_ZipCodeValidator/js/view/cart/shipping-rates'
         }
-    }
+    },
 };

@@ -27,14 +27,14 @@ class Region extends \Magento\Framework\Model\AbstractModel implements RegionInt
     /**
      * @var string
      */
-    private $cacheTag = 'zipcodevalidator_region';
+    protected $_cacheTag = 'zipcodevalidator_region';
 
     /**
      * Prefix of model events names
      *
      * @var string
      */
-    private $eventPrefix = 'zipcodevalidator_region';
+    protected $_eventPrefix = 'zipcodevalidator_region';
 
     /**
      * Initialize resource model

@@ -5,7 +5,7 @@
  * @category  Webkul
  * @package   Webkul_ZipCodeValidator
  * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license   https://store.webkul.com/license.html
  */
 namespace Webkul\ZipCodeValidator\Model\ResourceModel\Region\Grid;
@@ -19,7 +19,7 @@ class Collection extends RegionCollection implements SearchInterface
     /**
      * @var AggregationInterface
      */
-    private $aggregations;
+    protected $_aggregations;
 
     /**
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entity
@@ -47,7 +47,7 @@ class Collection extends RegionCollection implements SearchInterface
         $eventObject,
         $resourceModel,
         $model = 'Magento\Framework\View\Element\UiComponent\DataProvider\Document',
-        $connection = null,
+        \Magento\Framework\DB\Adapter\AdapterInterface $connection = null,
         \Magento\Framework\Model\ResourceModel\Db\AbstractDb $resource = null
     ) {
         parent::__construct(
@@ -70,7 +70,7 @@ class Collection extends RegionCollection implements SearchInterface
      */
     public function getAggregations()
     {
-        return $this->aggregations;
+        return $this->_aggregations;
     }
 
     /**
@@ -79,7 +79,7 @@ class Collection extends RegionCollection implements SearchInterface
      */
     public function setAggregations($aggregations)
     {
-        $this->aggregations = $aggregations;
+        $this->_aggregations = $aggregations;
     }
     
     /**
@@ -149,5 +149,16 @@ class Collection extends RegionCollection implements SearchInterface
     public function setItems(array $items = null)
     {
         return $this;
+    }
+    protected function _getAllIdsSelect($limit = null, $offset = null)
+    {
+        $idsSelect = clone $this->getSelect();
+        $idsSelect->reset(\Magento\Framework\DB\Select::ORDER);
+        $idsSelect->reset(\Magento\Framework\DB\Select::LIMIT_COUNT);
+        $idsSelect->reset(\Magento\Framework\DB\Select::LIMIT_OFFSET);
+        $idsSelect->reset(\Magento\Framework\DB\Select::COLUMNS);
+        $idsSelect->columns($this->getResource()->getIdFieldName(), 'main_table');
+        $idsSelect->limit($limit, $offset);
+        return $idsSelect;
     }
 }

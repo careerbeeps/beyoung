@@ -5,7 +5,7 @@
  * @category  Webkul
  * @package   Webkul_ZipCodeValidator
  * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license   https://store.webkul.com/license.html
  */
 namespace Webkul\ZipCodeValidator\Controller\Adminhtml\Region;
@@ -14,19 +14,6 @@ use Magento\Backend\App\Action\Context;
 
 class Delete extends \Magento\Backend\App\Action
 {
-
-    /**
-     * @var region
-     */
-
-    private $region;
-
-    /**
-     * @var zipcodeCollection
-     */
-
-    private $zipcodeCollection;
-
     /**
      * @param Context $context
      * @param \Webkul\ZipCodeValidator\Model\Region $region
@@ -56,20 +43,22 @@ class Delete extends \Magento\Backend\App\Action
     public function execute()
     {
         try {
-            $data=$this->getRequest()->getParams();
-            if (isset($data['id'])) {
-                $id=$data['id'];
+            $data = $this->getRequest()->getParams();
+            if (!empty($data['id'])) {
+                $id = $data['id'];
                 $region = $this->region->load($id);
-                if ($region) {
-                    $this->removeItem($region);
+                if ($region && $region->getId() == $id) {
+                    $region->delete();
+
                     $zipcodeCollection = $this->zipcodeCollection->create()
                         ->addFieldToFilter('region_id', $id);
+
                     if ($zipcodeCollection->getSize()) {
-                        foreach ($zipcodeCollection as $zipcode) {
-                            $this->removeItem($zipcode);
-                        }
+                        $zipcodeCollection->walk('delete');
                     }
-                    $this->messageManager->addSuccess(__('Region deleted succesfully'));
+                    $this->messageManager->addSuccess(__('Region deleted successfully'));
+                } else {
+                    $this->messageManager->addError(__("Region with '%1' Id does not exist", $id));
                 }
             } else {
                 $this->messageManager->addError(__('Region Id is Invalid'));
@@ -79,15 +68,5 @@ class Delete extends \Magento\Backend\App\Action
         }
         $resultRedirect = $this->resultRedirectFactory->create();
         return $resultRedirect->setPath('*/*/');
-    }
-
-    /**
-     * Remove Item
-     *
-     * @param object $item
-     */
-    private function removeItem($item)
-    {
-        $item->delete();
     }
 }

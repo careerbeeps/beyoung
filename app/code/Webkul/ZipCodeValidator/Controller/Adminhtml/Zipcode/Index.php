@@ -18,7 +18,7 @@ class Index extends ZipcodeController
     /**
      * @var \Webkul\ZipCodeValidator\Model\Region
      */
-    private $region;
+    protected $_region;
 
     /**
      * @param \Magento\Backend\App\Action\Context     $context
@@ -26,9 +26,9 @@ class Index extends ZipcodeController
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Webkul\ZipCodeValidator\Model\Region $regionModel
+        \Webkul\ZipCodeValidator\Model\Region $region
     ) {
-        $this->region = $regionModel;
+        $this->_region = $region;
         parent::__construct($context);
     }
 
@@ -39,12 +39,7 @@ class Index extends ZipcodeController
     {
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $regionId = $this->getRequest()->getParam('region_id');
-        $region=$this->region->getCollection()->addFieldToFilter('id', $regionId);
-        if (!$region->getSize()) {
-            $this->messageManager->addError(__("Region with '%1' Id Does Not Exist", $regionId));
-            return $this->resultRedirectFactory->create()->setPath('zipcodevalidator/region/index');
-        }
-        $regionName = $this->region->load($regionId)->getRegionName();
+        $regionName = $this->_region->load($regionId)->getRegionName();
         $resultPage->getConfig()->getTitle()->prepend(__($regionName.' Zipcode List'));
         return $resultPage;
     }

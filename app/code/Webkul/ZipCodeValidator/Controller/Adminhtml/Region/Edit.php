@@ -18,17 +18,17 @@ class Edit extends RegionController
     /**
      * @var \Magento\Backend\Model\Session
      */
-    private $backendSession;
+    protected $_backendSession;
 
     /**
      * @var \Magento\Framework\Registry
      */
-    private $registry;
+    protected $_registry;
 
     /**
      * @var \Webkul\ZipCodeValidator\Model\RegionFactory
      */
-    private $region;
+    protected $_region;
 
     /**
      * @param \Magento\Backend\App\Action\Context            $context
@@ -40,9 +40,9 @@ class Edit extends RegionController
         \Magento\Framework\Registry $registry,
         \Webkul\ZipCodeValidator\Model\RegionFactory $region
     ) {
-        $this->backendSession = $context->getSession();
-        $this->registry = $registry;
-        $this->region = $region;
+        $this->_backendSession = $context->getSession();
+        $this->_registry = $registry;
+        $this->_region = $region;
         parent::__construct($context);
     }
 
@@ -52,15 +52,15 @@ class Edit extends RegionController
     public function execute()
     {
         $id = $this->getRequest()->getParam('id');
-        $region = $this->region->create();
+        $region = $this->_region->create();
         if ($this->getRequest()->getParam('id')) {
             $region->load($this->getRequest()->getParam('id'));
         }
-        $data = $this->backendSession->getFormData(true);
+        $data = $this->_backendSession->getFormData(true);
         if (!empty($data)) {
             $region->setData($data);
         }
-        $this->registry->register('zipcodevalidator', $region);
+        $this->_registry->register('zipcodevalidator', $region);
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->getConfig()->getTitle()->prepend(__('Region Entries'));
         $resultPage->getConfig()->getTitle()->prepend(

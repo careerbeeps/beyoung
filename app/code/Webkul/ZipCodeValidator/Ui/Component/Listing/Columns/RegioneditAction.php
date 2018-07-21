@@ -20,7 +20,7 @@ class RegioneditAction extends Column
     /**
      * @var UrlInterface
      */
-    private $urlBuilder;
+    protected $_urlBuilder;
 
     /**
      * @param ContextInterface $context
@@ -36,7 +36,7 @@ class RegioneditAction extends Column
         array $components = [],
         array $data = []
     ) {
-        $this->urlBuilder = $urlBuilder;
+        $this->_urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -52,7 +52,7 @@ class RegioneditAction extends Column
             $storeId = $this->context->getFilterParam('store_id');
             foreach ($dataSource['data']['items'] as &$item) {
                 $item[$this->getData('name')]['edit'] = [
-                    'href' => $this->urlBuilder->getUrl(
+                    'href' => $this->_urlBuilder->getUrl(
                         'zipcodevalidator/region/edit',
                         ['id' => $item['id'], 'store' => $storeId]
                     ),

@@ -5,7 +5,7 @@
  * @category  Webkul
  * @package   Webkul_ZipCodeValidator
  * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license   https://store.webkul.com/license.html
  */
 namespace Webkul\ZipCodeValidator\Setup;
@@ -23,6 +23,7 @@ class InstallSchema implements InstallSchemaInterface
     {
         $installer = $setup;
         $installer->startSetup();
+        
         /**
          * Create table 'zipcodevalidator_region'
          */
@@ -86,11 +87,25 @@ class InstallSchema implements InstallSchemaInterface
                 'Region Id'
             )
             ->addColumn(
-                'region_zipcode',
+                'serial_no',
+                \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                11,
+                ['unsigned' => true, 'nullable' => false],
+                'Serial No'
+            )
+            ->addColumn(
+                'region_zipcode_from',
                 \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 255,
                 ['unsigned' => true, 'nullable' => false],
-                'Zipcode'
+                'Zipcode_From'
+            )
+            ->addColumn(
+                'region_zipcode_to',
+                \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                255,
+                ['unsigned' => true, 'nullable' => false],
+                'Zipcode_To'
             )
             ->addColumn(
                 'created_at',

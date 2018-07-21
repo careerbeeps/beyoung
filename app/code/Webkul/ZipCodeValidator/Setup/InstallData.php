@@ -28,7 +28,7 @@ class InstallData implements InstallDataInterface
      *
      * @var EavSetupFactory
      */
-    private $eavSetupFactory;
+    private $_eavSetupFactory;
 
     /**
      * @var ControllersRepository
@@ -43,7 +43,7 @@ class InstallData implements InstallDataInterface
     public function __construct(
         EavSetupFactory $eavSetupFactory
     ) {
-        $this->eavSetupFactory = $eavSetupFactory;
+        $this->_eavSetupFactory = $eavSetupFactory;
     }
 
     /**
@@ -55,7 +55,7 @@ class InstallData implements InstallDataInterface
         ModuleContextInterface $context
     ) {
         /** @var EavSetup $eavSetup */
-        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
+        $eavSetup = $this->_eavSetupFactory->create(['setup' => $setup]);
 
         /**
          * Add attributes to the eav/attribute
@@ -85,6 +85,30 @@ class InstallData implements InstallDataInterface
                 'used_in_product_listing' => true,
                 'unique' => false,
                 'apply_to'=>'simple,configurable,bundle,grouped'
+            ]
+        );
+        $eavSetup->addAttribute(
+            \Magento\Catalog\Model\Product::ENTITY,
+            'zcv_option',
+            [
+                'label' => 'ZipCode Status',
+                'input' => 'select',
+                'group' => 'Product Details',
+                'source' => 'Magento\Eav\Model\Entity\Attribute\Source\Boolean',
+                'backend' => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
+                'global' => ScopedAttributeInterface::SCOPE_GLOBAL,
+                'visible' => true,
+                'required' => false,
+                'user_defined' => false,
+                'default' => '',
+                'searchable' => false,
+                'filterable' => false,
+                'comparable' => false,
+                'visible_on_front' => false,
+                'used_in_product_listing' => true,
+                'unique' => false,
+                'apply_to'=>'simple,configurable,bundle,grouped',
+                'note' => 'Zipcode Validator enable on this product or not',
             ]
         );
     }

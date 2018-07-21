@@ -5,7 +5,7 @@
  * @category  Webkul
  * @package   Webkul_ZipCodeValidator
  * @author    Webkul
- * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
  * @license   https://store.webkul.com/license.html
  */
 namespace Webkul\ZipCodeValidator\Block\Product;
@@ -15,29 +15,34 @@ class ViewOnProduct extends \Magento\Framework\View\Element\Template
     /**
      * @var \Magento\Customer\Model\Session
      */
-    private $customerSession;
+    protected $_customerSession;
 
     /**
      * @var Magento\Customer\Model\Address
      */
-    private $address;
+    protected $_address;
 
     /**
      * @var Magento\Catalog\Model\Product
      */
-    private $product;
+    protected $_product;
 
     /**
-     * @var Magento\CatalogInventory\Model\Stock\StockItemRepository
+     * @var Webkul\ZipCodeValidator\Helper
      */
-    private $stockItemRepository;
+    protected $_helper;
+
+    /**
+     * @var Magento\CatalogInventory\Api\StockRegistryInterface
+     */
+    protected $stockRegistry;
 
     /**
      * @param \Magento\Backend\Block\Template\Context                   $context
      * @param \Magento\Customer\Model\Session                           $customerSession
      * @param \Magento\Customer\Model\Address                           $address
      * @param \Magento\Catalog\Model\Product                            $product
-     * @param \Magento\CatalogInventory\Model\Stock\StockItemRepository $stockItemRepository
+     * @param \Magento\CatalogInventory\Api\StockRegistryInterface      $stockRegistry
      * @param array                                                     $data
      */
     public function __construct(
@@ -45,13 +50,15 @@ class ViewOnProduct extends \Magento\Framework\View\Element\Template
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Customer\Model\Address $address,
         \Magento\Catalog\Model\Product $product,
-        \Magento\CatalogInventory\Model\Stock\StockItemRepository $stockItemRepository,
+        \Magento\CatalogInventory\Api\StockRegistryInterface $stockRegistry,
+        \Webkul\ZipCodeValidator\Helper\Data $helper,
         array $data = []
     ) {
-        $this->customerSession = $customerSession;
-        $this->address = $address;
-        $this->product = $product;
-        $this->stockItemRepository = $stockItemRepository;
+        $this->_customerSession = $customerSession;
+        $this->_address = $address;
+        $this->_product = $product;
+        $this->stockRegistry = $stockRegistry;
+        $this->_helper = $helper;
         parent::__construct($context, $data);
     }
 
@@ -62,9 +69,9 @@ class ViewOnProduct extends \Magento\Framework\View\Element\Template
      */
     public function getCustomerZipcode()
     {
-        if ($this->customerSession->getCustomerId()) {
-            $customerAddressId = $this->customerSession->getCustomer()->getDefaultShipping();
-            $postcode = $this->address->load($customerAddressId)->getPostcode();
+        if ($this->_customerSession->getCustomerId()) {
+            $customerAddressId = $this->_customerSession->getCustomer()->getDefaultShipping();
+            $postcode = $this->_address->load($customerAddressId)->getPostcode();
             return $postcode;
         }
         return '';
@@ -78,17 +85,33 @@ class ViewOnProduct extends \Magento\Framework\View\Element\Template
     public function getProduct()
     {
         $id = $this->getRequest()->getParam('id');
-        return $this->product->load($id);
+        return $this->_product->load($id);
     }
     /**
      * get Stock status
      *
      * @return boolean
      */
-    public function getStockValue()
+    public function getStockValue($productId)
     {
-        return $this->stockItemRepository
-            ->get($this->getRequest()->getParam('id'))
-            ->getIsInStock();
+        try {
+            $stockItem = $this->stockRegistry->getStockItem($productId);
+            if ($stockItem) {
+                return $stockItem->getIsInStock();
+            }
+        } catch (\Exception $e) {
+            $this->_helper->logDataInLogger("Block_ViewOnProduct_getStockValue : ".$e->getMessage());
+        }
+    }
+
+    public function isDisplayValidatorField($productId)
+    {
+        $regionIds = $this->_helper->validateZipCode($productId);
+        
+        if (!empty($regionIds)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

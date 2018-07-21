@@ -1,0 +1,28 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$request = $objectManager->get('Magento\Framework\App\Action\Context')->getRequest()->getFullActionName();
+$cmspages = array('cms_index_index','cms_page_view');
+if (in_array($request, $cmspages)) {
+    $cmsPage = $objectManager->get('\Magento\Cms\Model\Page');
+    $helper=$this->helper('Navin\Importexportcategory\Helper\Data');
+    ?>
+<meta property="og:type" content="og:website" />
+<meta property="fb:app_id" content="1795968774032189" />
+<meta property="og:title" content="<?php echo $cmsPage->getTitle();?>" />
+<meta property="og:image" content="<?php echo $helper->getStoreUrl() ?>media/logo/stores/1/logo_tm_1_.png"/>
+<meta property="og:image:width" content="200" />
+<meta property="og:image:height" content="200" />
+<meta property="og:description" content="<?php echo $cmsPage->getMetaDescription();?>" />
+<meta property="og:url" content="<?php echo $helper->getStoreUrl() ?>" />
+<meta property="og:image:alt" content="<?php echo $cmsPage->getTitle();?>" />
+<meta property="og:site_name" content="Beyoung" />
+
+<meta name="twitter:app:country" content="IN" />
+<meta name="twitter:card" content="" />
+<meta name="twitter:site" content="@BeyoungFolks" />
+<meta name="twitter:description" content="<?php echo $cmsPage->getMetaDescription();?>" />
+<meta name="twitter:title" content="<?php echo $cmsPage->getTitle();?>" />
+<meta name="twitter:creator" content="@BeyoungFolks" />
+<meta name="twitter:image" content="<?php echo $helper->getStoreUrl() ?>media/logo/stores/1/logo_tm_1_.png"/>
+
+<?php }?>
